@@ -13,6 +13,9 @@ namespace Assets.Scripts.DemoGameCore.logic
             this.gameplaySave = gameplaySave;
             this.systemSettingSaveData = systemSettingSaveData;
         }
+
+        RootSaveData() { }
+
     }
 
     public class Factory : IRootSaveExtension<RootSaveData, SystemSettingSaveData, GameplaySaveData>
