@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpesfmre7g052"]
+
+[ext_resource type="Texture2D" uid="uid://dcodnasfl17n8" path="res://Resources/game/MenuScene/Background.png" id="1_tuusc"]
+[ext_resource type="Texture2D" uid="uid://dj50dylldtgem" path="res://Resources/game/MenuScene/Title.png" id="2_iefc8"]
+[ext_resource type="Texture2D" uid="uid://b3ln2ev0auqoc" path="res://Resources/game/MenuScene/退出.png" id="3_ylmtb"]
+[ext_resource type="Script" uid="uid://bwdtsmgsm843w" path="res://Scripts/godotcore/menuscreen/ButtonExitGame.cs" id="4_68vtp"]
+[ext_resource type="Texture2D" uid="uid://brc07x4vmntsi" path="res://Resources/game/MenuScene/ContinueBtn.png" id="5_qjfvo"]
+[ext_resource type="Script" uid="uid://dgdbmc2b2vft0" path="res://Scripts/godotcore/menuscreen/ButtonContinueGame.cs" id="6_g50d1"]
+[ext_resource type="Texture2D" uid="uid://byd2i5881ox2g" path="res://Resources/game/MenuScene/StartBtn.png" id="6_lfpg5"]
+[ext_resource type="Script" uid="uid://c16kpyf2bbt6s" path="res://Scripts/godotcore/menuscreen/ButtonNewGame.cs" id="8_gvolf"]
+
+[node name="MenuScreen" type="Node"]
+
+[node name="uiRoot" type="Node" parent="."]
+
+[node name="MenuBackground" type="Sprite2D" parent="uiRoot"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_tuusc")
+centered = false
+
+[node name="Title" type="Sprite2D" parent="uiRoot"]
+position = Vector2(574, 279)
+scale = Vector2(0.505882, 0.505882)
+texture = ExtResource("2_iefc8")
+
+[node name="buttonExitGame" type="TextureButton" parent="uiRoot"]
+offset_left = 42.0
+offset_top = 46.0
+offset_right = 127.0
+offset_bottom = 130.0
+texture_normal = ExtResource("3_ylmtb")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("4_68vtp")
+
+[node name="ButtonContainer" type="HBoxContainer" parent="uiRoot"]
+offset_left = 203.0
+offset_top = 454.0
+offset_right = 867.0
+offset_bottom = 552.0
+alignment = 1
+
+[node name="buttonContinueGame" type="TextureButton" parent="uiRoot/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_qjfvo")
+script = ExtResource("6_g50d1")
+
+[node name="buttonNewGame" type="TextureButton" parent="uiRoot/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_lfpg5")
+script = ExtResource("8_gvolf")
