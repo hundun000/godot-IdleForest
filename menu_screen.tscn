@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpesfmre7g052"]
+[gd_scene load_steps=10 format=3 uid="uid://cpesfmre7g052"]
 
+[ext_resource type="Script" uid="uid://de4b1fe7qk36p" path="res://Scripts/godotcore/menuscreen/MenuScreen.cs" id="1_g50d1"]
 [ext_resource type="Texture2D" uid="uid://dcodnasfl17n8" path="res://Resources/game/MenuScene/Background.png" id="1_tuusc"]
 [ext_resource type="Texture2D" uid="uid://dj50dylldtgem" path="res://Resources/game/MenuScene/Title.png" id="2_iefc8"]
 [ext_resource type="Texture2D" uid="uid://b3ln2ev0auqoc" path="res://Resources/game/MenuScene/退出.png" id="3_ylmtb"]
@@ -9,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://byd2i5881ox2g" path="res://Resources/game/MenuScene/StartBtn.png" id="6_lfpg5"]
 [ext_resource type="Script" uid="uid://c16kpyf2bbt6s" path="res://Scripts/godotcore/menuscreen/ButtonNewGame.cs" id="8_gvolf"]
 
-[node name="MenuScreen" type="Node"]
+[node name="MenuScreen" type="Node" node_paths=PackedStringArray("ContinueGameButton")]
+script = ExtResource("1_g50d1")
+ContinueGameButton = NodePath("uiRoot/ButtonContainer/buttonContinueGame")
 
 [node name="uiRoot" type="Node" parent="."]
 
