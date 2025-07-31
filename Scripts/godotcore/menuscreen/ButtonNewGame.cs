@@ -1,16 +1,20 @@
 using Godot;
+using GodotIdleForest.Scripts.godotcore;
 
 public partial class ButtonNewGame : TextureButton
 {
-	public override void _Ready()
+    DemoMenuScreen parent;
+    public override void _Ready()
 	{
 		Pressed += OnButtonPressed;
-	}
+
+        parent = GodotUtils.FindParentOfType<DemoMenuScreen>(this);
+    }
 
 	private void OnButtonPressed()
 	{
-		GameContainer.Instance.saveHandler.gameSaveCurrent();
-		GD.Print("按钮被点击了！gameSaveCurrent...");
+        parent.StageSelectMaskBoard.Show();
+		GD.Print("按钮被点击了！StageSelectMaskBoard.Show...");
 	}
 	public override void _Process(double delta)
 	{

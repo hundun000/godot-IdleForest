@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2vntanas0c43"]
+
+[ext_resource type="PackedScene" uid="uid://3bha0778xvv6" path="res://StageBoard.tscn" id="3_tqrw4"]
+
+[node name="PopupPanel" type="HBoxContainer"]
+auto_translate_mode = 1
+offset_left = 236.0
+offset_top = 54.0
+offset_right = 920.0
+offset_bottom = 605.0
+
+[node name="StageBoard" parent="." instance=ExtResource("3_tqrw4")]
+layout_mode = 2
+
+[node name="TextLabel" parent="StageBoard/TextureLabel" index="1"]
+text = "1号岛"
+
+[node name="StageBoard2" parent="." instance=ExtResource("3_tqrw4")]
+layout_mode = 2
+
+[node name="TextLabel" parent="StageBoard2/TextureLabel" index="1"]
+text = "2号岛"
+
+[editable path="StageBoard"]
+[editable path="StageBoard/TextureLabel"]
+[editable path="StageBoard2"]
+[editable path="StageBoard2/TextureLabel"]

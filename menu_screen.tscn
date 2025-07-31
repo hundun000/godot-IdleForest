@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpesfmre7g052"]
+[gd_scene load_steps=12 format=3 uid="uid://cpesfmre7g052"]
 
-[ext_resource type="Script" uid="uid://de4b1fe7qk36p" path="res://Scripts/godotcore/menuscreen/MenuScreen.cs" id="1_g50d1"]
+[ext_resource type="Script" uid="uid://de4b1fe7qk36p" path="res://Scripts/godotcore/menuscreen/DemoMenuScreen.cs" id="1_g50d1"]
 [ext_resource type="Texture2D" uid="uid://dcodnasfl17n8" path="res://Resources/game/MenuScene/Background.png" id="1_tuusc"]
 [ext_resource type="Texture2D" uid="uid://dj50dylldtgem" path="res://Resources/game/MenuScene/Title.png" id="2_iefc8"]
 [ext_resource type="Texture2D" uid="uid://b3ln2ev0auqoc" path="res://Resources/game/MenuScene/退出.png" id="3_ylmtb"]
@@ -9,10 +9,13 @@
 [ext_resource type="Script" uid="uid://dgdbmc2b2vft0" path="res://Scripts/godotcore/menuscreen/ButtonContinueGame.cs" id="6_g50d1"]
 [ext_resource type="Texture2D" uid="uid://byd2i5881ox2g" path="res://Resources/game/MenuScene/StartBtn.png" id="6_lfpg5"]
 [ext_resource type="Script" uid="uid://c16kpyf2bbt6s" path="res://Scripts/godotcore/menuscreen/ButtonNewGame.cs" id="8_gvolf"]
+[ext_resource type="Script" uid="uid://xfqtb1gh2c16" path="res://Scripts/godotcore/menuscreen/StageSelectMaskBoard.cs" id="10_gvolf"]
+[ext_resource type="PackedScene" uid="uid://d2vntanas0c43" path="res://popup_panel.tscn" id="11_csdst"]
 
-[node name="MenuScreen" type="Node" node_paths=PackedStringArray("ContinueGameButton")]
+[node name="MenuScreen" type="Node" node_paths=PackedStringArray("ContinueGameButton", "StageSelectMaskBoard")]
 script = ExtResource("1_g50d1")
 ContinueGameButton = NodePath("uiRoot/ButtonContainer/buttonContinueGame")
+StageSelectMaskBoard = NodePath("PopupPanel")
 
 [node name="uiRoot" type="Node" parent="."]
 
@@ -52,3 +55,16 @@ script = ExtResource("6_g50d1")
 layout_mode = 2
 texture_normal = ExtResource("6_lfpg5")
 script = ExtResource("8_gvolf")
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+initial_position = 3
+size = Vector2i(664, 559)
+current_screen = 0
+visible = true
+script = ExtResource("10_gvolf")
+
+[node name="box" parent="PopupPanel" instance=ExtResource("11_csdst")]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 660.0
+offset_bottom = 555.0

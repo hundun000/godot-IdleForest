@@ -1,14 +1,23 @@
+using Assets.Scripts.DemoGameCore.logic;
 using Godot;
+using GodotIdleForest.Scripts;
+using GodotIdleForest.Scripts.godotcore;
+using hundun.unitygame.enginecorelib;
 using System;
 
-public partial class MenuScreen : Node
+public partial class DemoMenuScreen : GodotBaseHundunScreen
 {
-    [Export] // 可以在编辑器中拖拽赋值
+    [Export]
     public BaseButton ContinueGameButton { get; set; }
+
+    [Export]
+    public StageSelectMaskBoard StageSelectMaskBoard { get; set; }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        base._Ready();
+
         if (!GameContainer.Instance.saveHandler.hasContinuedGameplaySave())
         {
             ContinueGameButton.Visible = false;
@@ -18,10 +27,8 @@ public partial class MenuScreen : Node
             ContinueGameButton.Visible = true;
         }
 
+
+
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-	{
-	}
 }
