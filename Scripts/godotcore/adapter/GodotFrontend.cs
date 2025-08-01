@@ -2,7 +2,7 @@ using Godot;
 using hundun.unitygame.gamelib;
 using System;
 
-namespace hundun.unitygame.enginecorelib
+namespace GodotIdleForest.Scripts.godotcore.adapter
 {
     public class GodotFrontend : IFrontend
     {

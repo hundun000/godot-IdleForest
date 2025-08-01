@@ -5,8 +5,8 @@ public partial class TextureLabel : Control
 {
     // ====== 内部引用 ======
     [Export]
-    private NinePatchRect _backgroundTexture;
+    public NinePatchRect PackgroundTexture { get; private set; }
     [Export]
-    private Label _textLabel;
+    public Label TextLabel { get; private set; }
 
 }

@@ -1,5 +1,6 @@
 using Assets.Scripts.DemoGameCore;
 using Assets.Scripts.DemoGameCore.logic;
+using GodotIdleForest.Scripts.godotcore.adapter;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
 using hundun.unitygame.enginecorelib;

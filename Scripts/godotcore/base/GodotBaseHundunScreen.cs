@@ -1,4 +1,5 @@
 using Godot;
+using hundun.unitygame.adapters;
 using hundun.unitygame.enginecorelib;
 using hundun.unitygame.gamelib;
 
@@ -11,13 +12,12 @@ namespace GodotIdleForest.Scripts.godotcore
 
         public LogicFrameHelper logicFrameHelper;
 
-        // Called when the node enters the scene tree for the first time.
-        public override void _Ready()
+        public override void _EnterTree()
         {
-            this.game = GameContainer.Instance;
+            GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_EnterTree开始");
+            this.game = GameContainer.Game;
         }
 
-        // Called every frame. 'delta' is the elapsed time since the previous frame.
         public override void _Process(double delta)
         {
             if (logicFrameHelper != null)

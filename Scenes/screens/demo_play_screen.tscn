@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbksl2m4yu2te"]
+
+[ext_resource type="Texture2D" uid="uid://dcodnasfl17n8" path="res://Resources/game/MenuScene/Background.png" id="1_2721e"]
+
+[node name="DemoPlayScreen" type="Node"]
+
+[node name="uiRoot" type="Node" parent="."]
+
+[node name="Background" type="Sprite2D" parent="uiRoot"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_2721e")
+centered = false

@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjrruu5cn0qbt"]
 
-[ext_resource type="Script" uid="uid://37ch3dajvmpp" path="res://Scripts/godotcore/base/TextureLabel.cs" id="1_ifw1c"]
-[ext_resource type="Texture2D" uid="uid://c54alrxmuvcbr" path="res://Resources/placeholderBoardNinePatch.png" id="2_6g0b2"]
+[ext_resource type="Script" uid="uid://37ch3dajvmpp" path="res://Scripts/godotcore/base/TextureLabel.cs" id="1_wrh3u"]
+[ext_resource type="Texture2D" uid="uid://c54alrxmuvcbr" path="res://Resources/placeholderBoardNinePatch.png" id="2_2jv1c"]
 
-[node name="TextureLabel" type="Control" node_paths=PackedStringArray("_backgroundTexture", "_textLabel")]
+[node name="TextureLabel" type="Control" node_paths=PackedStringArray("PackgroundTexture", "TextLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 105.0
 offset_bottom = 44.0
-script = ExtResource("1_ifw1c")
-_backgroundTexture = NodePath("Background")
-_textLabel = NodePath("TextLabel")
+script = ExtResource("1_wrh3u")
+PackgroundTexture = NodePath("Background")
+TextLabel = NodePath("TextLabel")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_6g0b2")
+texture = ExtResource("2_2jv1c")
 region_rect = Rect2(0, 0, 28, 28)
 patch_margin_left = 9
 patch_margin_top = 10

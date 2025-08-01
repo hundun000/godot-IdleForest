@@ -7,7 +7,7 @@ using System.Text.Json.Serialization; // 用于 JSON 属性和选项
 using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace hundun.unitygame.adapters
+namespace GodotIdleForest.Scripts.godotcore.adapter
 {
 	public class GodotSaveTool<T_SAVE> : ISaveTool<T_SAVE>
 	{

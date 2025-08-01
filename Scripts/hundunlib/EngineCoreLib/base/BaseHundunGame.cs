@@ -1,3 +1,4 @@
+using GodotIdleForest.Scripts.godotcore.adapter;
 using hundun.unitygame.gamelib;
 
 
