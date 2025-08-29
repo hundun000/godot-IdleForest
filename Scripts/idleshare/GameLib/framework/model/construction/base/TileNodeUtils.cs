@@ -71,9 +71,13 @@ namespace hundun.idleshare.gamelib
         RIGHT_DOWN
     }
 
-
+    /// <summary>
+    /// hexMode == HexMode.ODD_R
+    /// </summary>
     public class TileNodeUtils
     {
+
+
         public static TileNeighborDirection[] values =
         {
             TileNeighborDirection.LEFT_UP,

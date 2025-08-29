@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbksl2m4yu2te"]
+[gd_scene load_steps=8 format=4 uid="uid://bbksl2m4yu2te"]
 
-[ext_resource type="Texture2D" uid="uid://dcodnasfl17n8" path="res://Resources/game/MenuScene/Background.png" id="1_2721e"]
+[ext_resource type="Script" uid="uid://dd36rneq71iqg" path="res://Scripts/godotcore/PlayScreen/CameraZoomController.cs" id="1_72qwf"]
+[ext_resource type="Texture2D" uid="uid://cx484r8tuqryc" path="res://Resources/game/Sky.png" id="1_2721e"]
+[ext_resource type="Script" uid="uid://dtv2uegyhd0si" path="res://Scripts/godotcore/PlayScreen/DemoPlayScreen.cs" id="1_y3oel"]
+[ext_resource type="Texture2D" uid="uid://ngepiirskoh7" path="res://Resources/game/CellIcons.png" id="2_wqdcv"]
+[ext_resource type="Script" uid="uid://dafoon30uxisi" path="res://Scripts/godotcore/PlayScreen/MapController.cs" id="5_mdgi3"]
 
-[node name="DemoPlayScreen" type="Node"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_72qwf"]
+texture = ExtResource("2_wqdcv")
+margins = Vector2i(135, 95)
+separation = Vector2i(130, 90)
+texture_region_size = Vector2i(532, 614)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2721e"]
+tile_shape = 3
+tile_size = Vector2i(532, 614)
+sources/0 = SubResource("TileSetAtlasSource_72qwf")
+
+[node name="DemoPlayScreen" type="Node" node_paths=PackedStringArray("mapController")]
+script = ExtResource("1_y3oel")
+mapController = NodePath("uiRoot/TileMapLayer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 325)
+script = ExtResource("1_72qwf")
+CameraLimitMin = Vector2(0, 0)
+CameraLimitMax = Vector2(1000, 500)
 
 [node name="uiRoot" type="Node" parent="."]
 
@@ -10,3 +42,10 @@
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_2721e")
 centered = false
+
+[node name="TileMapLayer" type="TileMapLayer" parent="uiRoot"]
+position = Vector2(562, 364)
+scale = Vector2(0.2, 0.2)
+tile_map_data = PackedByteArray("AAD+////AAAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAP//AAAAAAAAAAD//wAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_2721e")
+script = ExtResource("5_mdgi3")

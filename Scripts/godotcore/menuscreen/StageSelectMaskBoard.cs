@@ -28,7 +28,7 @@ public partial class StageSelectMaskBoard : PopupPanel
             stageButtons[i].Pressed += () => {
                 GD.Print($"stageButtons{i} Pressed");
                 parent.game.saveHandler.gameplayLoadOrStarter(0);
-                GetTree().ChangeSceneToFile("res://Scenes/screens/demo_play_screen.tscn");
+                GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToPacked, GameContainer.SceneManager.DemoPlayScreen);
                 //GetTree().ChangeSceneToPacked(GameContainer.SceneManager.DemoPlayScreen);
             };
         }
