@@ -94,39 +94,37 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         override protected List<RootSaveData> genereateStarterRootSaveData()
         {
-
-
             Dictionary<KeyValuePair<int, int>, ConstructionSaveData> posMap = new();
 
             // 所有 DIRT 的坐标
             (new List<KeyValuePair<int, int>>() {
-                new(0, 0), new(1, 0), new(2, 0), new(4, 0), new(-1, 0), new(-3, 0) ,new(-2,1),new(-1,1),new(3,1),
-                new(4,1),new(0,2),new(1,2),new(-2,-1),new(-1,-1),new(3,-1),new(4,-1),new(0,-2),new(1,-2)
+                new(0, 0), new(1, 0), new(2, 0), new(4, 0), new(-1, 0), new(-3, 0) ,new(-3,1),new(-2,1),new(2,1), // 原: new(-2,1),new(-1,1),new(3,1)
+                new(3,1),new(0,2),new(1,2),new(-3,-1),new(-2,-1),new(2,-1),new(3,-1),new(0,-2),new(1,-2) // 原: new(-2,-1),new(-1,-1),new(3,-1),new(4,-1)
             }).ForEach(it =>
                 posMap.Add(it, quickDirt(it.Key, it.Value))
                 );
 
             // 所有 LAKE 的坐标
             (new List<KeyValuePair<int, int>>() {
-                new(1, 1), new(1, -1)
+                new(0, 1), new(0, -1) // 原: new(1, 1), new(1, -1)
             }).ForEach(it =>
                 posMap.Add(it, quickLake(it.Key, it.Value))
                 );
 
             // 所有 DESERT 的坐标
             (new List<KeyValuePair<int, int>>() {
-                new(-4,0),new(-2,0),new(3,0),new(5,0),new(-2,2),new(3,2),new(1,3),new(-2,-2),new(3,-2),new(1,-3)
+                new(-4,0),new(-2,0),new(3,0),new(5,0),new(-2,2),new(3,2),new(0,3),new(-2,-2),new(3,-2),new(0,-3) // 原: new(1,3),new(1,-3)
             }).ForEach(it =>
                 posMap.Add(it, quickDesert(it.Key, it.Value))
                 );
 
             // 所有 RUBBISH 的坐标
             (new List<KeyValuePair<int, int>>() {
-               new(-1, 4), new(0, 4),new(1,4),new(2,4),new(-3,3),new(-2,3),new(-1,3),new(0,3),new(2,3),new(3,3),new(4,3),
-                new(5,3),new(-4,2),new(-3,2),new(-1,2),new(2,2),new(4,2),new(5,2),new(-4,1),new(-3,1),new(0,1),new(2,1),
-                new(5,1),new(6,1),new(-5,0),new(6,0),new(-4,-1),new(-3,-1),new(0,-1),new(2,-1),new(5,-1),new(6,-1),new(-4,-2),
-                new(-3,-2),new(-1,-2),new(2,-2),new(4,-2),new(5,-2),new(-3,-3),new(-2,-3),new(-1,-3),new(0,-3),new(2,-3),new(3,-3),
-                new(4,-3),new(5,-3),new(-1,-4),new(0,-4),new(1,-4),new(2,-4)
+               new(-1, 4), new(0, 4),new(1,4),new(2,4),new(-4,3),new(-3,3),new(-2,3),new(-1,3),new(1,3),new(2,3),new(3,3), // 原: new(-3,3),new(-2,3),new(-1,3),new(0,3),new(2,3),new(3,3),new(4,3)
+                new(4,3),new(-4,2),new(-3,2),new(-1,2),new(2,2),new(4,2),new(5,2),new(-5,1),new(-4,1),new(-1,1),new(1,1), // 原: new(-4,1),new(-3,1),new(0,1),new(2,1)
+                new(4,1),new(5,1),new(-5,0),new(6,0),new(-5,-1),new(-4,-1),new(-1,-1),new(1,-1),new(4,-1),new(5,-1),new(-4,-2), // 原: new(-4,-1),new(-3,-1),new(0,-1),new(2,-1),new(5,-1),new(6,-1)
+                new(-3,-2),new(-1,-2),new(2,-2),new(4,-2),new(5,-2),new(-4,-3),new(-3,-3),new(-2,-3),new(-1,-3),new(1,-3),new(2,-3), // 原: new(-3,-3),new(-2,-3),new(-1,-3),new(0,-3),new(2,-3),new(3,-3)
+                new(3,-3),new(4,-3),new(-1,-4),new(0,-4),new(1,-4),new(2,-4)
             }).ForEach(it =>
                 posMap.Add(it, quickRubbish(it.Key, it.Value))
                 );
@@ -136,18 +134,18 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             // 所有 DIRT 的坐标
             (new List<KeyValuePair<int, int>>() {
-                new(0, 2),new(0,1),new(1,1),new(-1,0),new(1,0),new(-1,-1),new(0,-1),new(1,-1),new(2,-1),new(-4,3),new(-3,3),new(4,3),new(5,3)
+                new(0, 2),new(-1,1),new(0,1),new(-1,0),new(1,0),new(-2,-1),new(-1,-1),new(0,-1),new(1,-1),new(-5,3),new(-4,3),new(3,3),new(4,3) // 原: new(0,1),new(1,1),new(-1,-1),new(0,-1),new(1,-1),new(2,-1),new(-4,3),new(-3,3),new(4,3),new(5,3)
             }).ForEach(it =>
                 posMap2.Add(it, quickDirt(it.Key, it.Value))
                 );
 
             // 所有 RUBBISH 的坐标
             (new List<KeyValuePair<int, int>>() {
-               new(-5,4),new(-4,4),new(-3,4),new(0,4),new(3,4),new(4,4),new(5,4),new(-5,3),new(-2,3),
-               new(0,3),new(1,3),new(3,3),new(6,3),new(-5,2),new(-3,2),new(-1,2),new(1,2),new(3,2),
-               new(5,2),new(-4,1),new(-3,1),new(-1,1),new(2,1),new(4,1),new(5,1),new(-2,0),new(2,0),
-               new(-2,-1),new(3,-1),new(-3,-2),new(-1,-2),new(1,-2),new(3,-2),new(-3,-3),new(-2,-3),
-               new(-1,-3),new(0,-3),new(1,-3),new(2,-3),new(3,-3),new(4,-3)
+               new(-5,4),new(-4,4),new(-3,4),new(0,4),new(3,4),new(4,4),new(5,4),new(-6,3),new(-3,3), // 原: new(-5,3),new(-2,3)
+               new(-1,3),new(0,3),new(2,3),new(5,3),new(-5,2),new(-3,2),new(-1,2),new(1,2),new(3,2), // 原: new(0,3),new(1,3),new(3,3),new(6,3)
+               new(5,2),new(-5,1),new(-4,1),new(-2,1),new(1,1),new(3,1),new(4,1),new(-2,0),new(2,0), // 原: new(-4,1),new(-3,1),new(-1,1),new(2,1),new(4,1),new(5,1)
+               new(-3,-1),new(2,-1),new(-3,-2),new(-1,-2),new(1,-2),new(3,-2),new(-4,-3),new(-3,-3), // 原: new(-2,-1),new(3,-1),new(-3,-3),new(-2,-3)
+               new(-2,-3),new(-1,-3),new(0,-3),new(1,-3),new(2,-3),new(3,-3) // 原: new(-1,-3),new(0,-3),new(1,-3),new(2,-3),new(3,-3),new(4,-3)
             }).ForEach(it =>
                 posMap2.Add(it, quickRubbish(it.Key, it.Value))
                  );
@@ -171,20 +169,20 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             // 所有 DIRT 的坐标
             (new List<KeyValuePair<int, int>>() {
-             new(3,3),new(4,3),new(2,2),new(4,2),new(0,1),new(1,1),new(2,1),new(3,1),new(4,1),new(-1,0),
-             new(1,0),new(3,0),new(0,-1),new(1,-1),new(2,-1),new(3,-1),new(4,-1),new(2,-2),new(4,-2),
-             new(3,-3),new(4,-3)
+             new(2,3),new(3,3),new(2,2),new(4,2),new(-1,1),new(0,1),new(1,1),new(2,1),new(3,1),new(-1,0), // 原: new(3,3),new(4,3),new(0,1),new(1,1),new(2,1),new(3,1),new(4,1)
+             new(1,0),new(3,0),new(-1,-1),new(0,-1),new(1,-1),new(2,-1),new(3,-1),new(2,-2),new(4,-2), // 原: new(0,-1),new(1,-1),new(2,-1),new(3,-1),new(4,-1)
+             new(2,-3),new(3,-3) // 原: new(3,-3),new(4,-3)
             }).ForEach(it =>
                 posMap3.Add(it, quickDirt(it.Key, it.Value))
                 );
 
             // 所有 RUBBISH 的坐标
             (new List<KeyValuePair<int, int>>() {
-               new(-1,4),new(0,4),new(1,4),new(-4,3),new(-3,3),new(-1,3),new(0,3),new(1,3),new(2,3),
-               new(5,3),new(-5,2),new(-4,2),new(-3,2),new(-2,2),new(-1,2),new(1,2),new(5,2),new(-5,1),
-               new(-3,1),new(-2,1),new(6,1),new(-4,0),new(-2,0),new(-5,-1),new(-3,-1),new(-2,-1),new(6,-1),
-               new(-5,-2),new(-4,-2),new(-3,-2),new(-2,-2),new(-1,-2),new(1,-2),new(5,-2),new(-4,-3),
-               new(-3,-3),new(-1,-3),new(0,-3),new(1,-3),new(2,-3),new(5,-3),new(-1,-4),new(0,-4),new(1,-4)
+               new(-1,4),new(0,4),new(1,4),new(-5,3),new(-4,3),new(-2,3),new(-1,3),new(0,3),new(1,3), // 原: new(-4,3),new(-3,3),new(-1,3),new(0,3),new(1,3),new(2,3)
+               new(4,3),new(-5,2),new(-4,2),new(-3,2),new(-2,2),new(-1,2),new(1,2),new(5,2),new(-6,1), // 原: new(5,3),new(-5,1)
+               new(-4,1),new(-3,1),new(5,1),new(-4,0),new(-2,0),new(-6,-1),new(-4,-1),new(-3,-1),new(5,-1), // 原: new(-3,1),new(-2,1),new(6,1),new(-5,-1),new(-3,-1),new(-2,-1),new(6,-1)
+               new(-5,-2),new(-4,-2),new(-3,-2),new(-2,-2),new(-1,-2),new(1,-2),new(5,-2),new(-5,-3), // 原: new(-4,-3)
+               new(-4,-3),new(-2,-3),new(-1,-3),new(0,-3),new(1,-3),new(4,-3),new(-1,-4),new(0,-4),new(1,-4) // 原: new(-3,-3),new(-1,-3),new(0,-3),new(1,-3),new(2,-3),new(5,-3)
             }).ForEach(it =>
                 posMap3.Add(it, quickRubbish(it.Key, it.Value))
                  );
@@ -192,14 +190,13 @@ namespace Assets.Scripts.DemoGameCore.logic
             // 所有 LAKE 的坐标
             (new List<KeyValuePair<int, int>>() {
                 new(0,0),new(2,0),new(3,-2),new(3,2)
-
             }).ForEach(it =>
                 posMap3.Add(it, quickLake(it.Key, it.Value))
                 );
 
             // 所有 DESERT 的坐标
             (new List<KeyValuePair<int, int>>() {
-                new(-3,0),new(-1,1),new(-1,-1),new(0,2),new(0,-2)
+                new(-3,0),new(-2,1),new(-2,-1),new(0,2),new(0,-2) // 原: new(-1,1),new(-1,-1)
             }).ForEach(it =>
                 posMap3.Add(it, quickDesert(it.Key, it.Value))
                 );

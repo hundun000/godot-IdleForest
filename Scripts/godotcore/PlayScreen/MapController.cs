@@ -54,11 +54,11 @@ namespace GodotIdleForest.Scripts.godotcore
             switch(construction.prototypeId)
             {
                 case ConstructionPrototypeId.DIRT:
-                    return new Vector2I(1, 0);
+                    return new Vector2I(0, 0);
                 case ConstructionPrototypeId.DESERT:
                     return new Vector2I(2, 0);
                 case ConstructionPrototypeId.RUBBISH:
-                    return new Vector2I(0, 0);
+                    return new Vector2I(1, 0);
                 case ConstructionPrototypeId.LAKE:
                     return new Vector2I(3, 0);
                 case ConstructionPrototypeId.SMALL_TREE:
@@ -186,14 +186,6 @@ namespace GodotIdleForest.Scripts.godotcore
             return constructions
                 .Where(it => !specialConstructionPrototypeIds.Contains(it.saveData.prototypeId))
                 .ToList();
-        }
-
-        // 换算：预设的二维坐标系坐标 -> 六边形坐标系在屏幕空间的映射
-        private static Vector2I CalculatePosition(int gridX, int gridY)
-        {
-            float y = 0.75f * gridY;
-            float x = Mathf.Sqrt(3) / 2 * (gridX - (Math.Abs(gridY) % 2) / 2.0f);
-            return new Vector2I((int)x, (int)y);
         }
 
 
