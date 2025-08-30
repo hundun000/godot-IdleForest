@@ -16,6 +16,6 @@ layout_mode = 2
 layout_mode = 2
 
 [editable path="StageBoard"]
-[editable path="StageBoard/TextureLabel"]
+[editable path="StageBoard/stageName"]
 [editable path="StageBoard2"]
-[editable path="StageBoard2/TextureLabel"]
+[editable path="StageBoard2/stageName"]

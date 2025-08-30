@@ -4,11 +4,11 @@ using GodotIdleForest.Scripts.godotcore;
 public partial class ButtonNewGame : TextureButton
 {
     DemoMenuScreen parent;
-    public override void _Ready()
+    public override void _EnterTree()
 	{
-		Pressed += OnButtonPressed;
-
         parent = GodotUtils.FindParentOfType<DemoMenuScreen>(this);
+
+        Pressed += OnButtonPressed;
     }
 
 	private void OnButtonPressed()

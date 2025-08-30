@@ -12,30 +12,36 @@ namespace GodotIdleForest.Scripts.godotcore
 {
     public partial class DemoPlayScreen : GodotBaseHundunScreen
     {
-        [Export]
         public MapController mapController;
+        public BoardManager boardManager;
 
         protected List<ILogicFrameListener> logicFrameListeners = new List<ILogicFrameListener>();
         protected List<IGameAreaChangeListener> gameAreaChangeListeners = new List<IGameAreaChangeListener>();
 
 
-        // Called when the node enters the scene tree for the first time.
-        public override void _Ready()
-        {
-            GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_Ready开始");
-            base._Ready();
 
+        public override void _EnterTree()
+        {
+            GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_EnterTree 开始");
+            base._EnterTree();
+
+            mapController = GodotUtils.FindFirstChildOfType<MapController>(this);
+            boardManager = GodotUtils.FindFirstChildOfType<BoardManager>(this);
+            // lazyInitUiRootContext() 不再需要(优先使用Godot的开发习惯)，由Godot引擎自行自上而下访问_EnterTree
+
+        }
+
+        public override void _Ready()
+        { 
+            base._Ready();
             lazyInitLogicContext();
 
             // start area
             setAreaAndNotifyChildren(GameArea.AREA_SINGLE);
-
-
         }
 
         protected void lazyInitLogicContext()
         {
-            mapController.parent = this;
 
 
             logicFrameListeners.Add(game.idleGameplayExport);

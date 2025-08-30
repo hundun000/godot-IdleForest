@@ -14,11 +14,10 @@ public partial class DemoMenuScreen : GodotBaseHundunScreen
     [Export]
     public StageSelectMaskBoard StageSelectMaskBoard { get; set; }
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-	{
-        GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_Ready开始");
-        base._Ready();
+    public override void _EnterTree()
+    {
+        GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_EnterTree 开始");
+        base._EnterTree();
 
         if (!GameContainer.Game.saveHandler.hasContinuedGameplaySave())
         {

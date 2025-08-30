@@ -1,5 +1,6 @@
 using Assets.Scripts.DemoGameCore.logic;
 using Godot;
+using Godot.Collections;
 using GodotIdleForest.Scripts.godotcore;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
@@ -42,7 +43,7 @@ namespace GodotIdleForest.Scripts.godotcore
         }
     }
 
-    public partial class Cell : Node
+    public partial class CellExtraData
     {
         public MapController mapController; // 父UI引用
         public BaseConstruction construction; // 后端数据引用
@@ -125,7 +126,7 @@ namespace GodotIdleForest.Scripts.godotcore
 
 
 
-    public partial class MapController : TileMapLayer,
+    public partial class MapController : Node,
         ILogicFrameListener,
         IGameAreaChangeListener,
         IConstructionCollectionListener
@@ -135,20 +136,28 @@ namespace GodotIdleForest.Scripts.godotcore
             ConstructionPrototypeId.ORGANIZATION
         };
 
+        public TileMapLayer tileMapLayer;
+        public Sprite2D focusCircle;       // 选中格位时显示的聚焦圈
+
         public DemoPlayScreen parent;      // 通过代码绑定
-        private bool firstCome;     // 判断是否是初次加载地图
-        private Dictionary<GridPosition, Cell> constructionControlNodes = new();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
+        private System.Collections.Generic.Dictionary<Vector2I, CellExtraData> constructionControlNodes = new();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
 
-        // Called when the node enters the scene tree for the first time.
-        public override void _Ready()
+        public override void _EnterTree()
         {
-            firstCome = true;
-
+            parent = GodotUtils.FindParentOfType<DemoPlayScreen>(this);
+            tileMapLayer = GodotUtils.FindFirstChildOfType<TileMapLayer>(this);
+            focusCircle = GetNode<Sprite2D>("focusCircle");
         }
 
-        // Called every frame. 'delta' is the elapsed time since the previous frame.
-        public override void _Process(double delta)
+        public override void _Ready()
         {
+            base._Ready();
+
+            // 让光环绘制在地图之上
+            focusCircle.ZIndex = tileMapLayer.ZIndex + 1;
+
+            // 初始隐藏
+            focusCircle.Visible = false;
         }
 
         public void onGameAreaChange(string last, string current)
@@ -166,8 +175,8 @@ namespace GodotIdleForest.Scripts.godotcore
 
             BuildBoard(backendLevelInfo);
 
-            parent.game.frontend.log(this.getClass().getSimpleName(), "MapController change to: " + String.Join(",",
-                constructions.Select(construction => construction.name))
+            parent.game.frontend.log(this.getClass().getSimpleName(), "MapController change to: " + String.Join(", ",
+                constructions.Select(construction => $"{construction.name}({construction.saveData.position.x},{construction.saveData.position.y})"))
             );
         }
 
@@ -191,42 +200,106 @@ namespace GodotIdleForest.Scripts.godotcore
         // 将地图打印到屏幕上
         private void BuildBoard(BackendLevelInfo levelInfo)
         {
-            // 判断是否是初次加载地图
-            if (firstCome)
+
+            // 清理旧有地图
+            tileMapLayer.Clear();
+            constructionControlNodes.Clear();
+
+            // 初始化地图
+            levelInfo.constructions.ForEach(construction =>
             {
-                // 清理旧有地图
-                this.Clear();
-                constructionControlNodes.Clear();
+                CellExtraData cell = new();
+                cell.StateChangeTo(this, construction);
+                Vector2I pos = new Vector2I(construction.saveData.position.x, construction.saveData.position.y);
+                tileMapLayer.SetCell(pos, 0, cell.GetSourceId());
+                constructionControlNodes.Add(pos, cell);
+            });
 
-                // 初始化地图
-                levelInfo.constructions.ForEach(construction =>
-                {
-
-                    Cell cell = new();
-                    cell.StateChangeTo(this, construction);
-                    this.SetCell(new Vector2I(construction.saveData.position.x, construction.saveData.position.y), 0, cell.GetSourceId());
-                    constructionControlNodes.Add(construction.saveData.position, cell);
-                });
-
-                firstCome = false;
-            }
-            else
-            {
-                levelInfo.constructions.ForEach(construction =>
-                {
-                    Cell cell = constructionControlNodes[construction.position];
-                    if (cell.construction != construction)
-                    {
-                        cell.StateChangeTo(this, construction);
-                        // TODO boardManager.boardCheckRecall(construction);
-                    }
-                });
-            }
         }
 
         void ILogicFrameListener.onLogicFrame()
         {
             // do nothing
+        }
+
+        private bool isDragging = false;
+        private Vector2 pressPosition;
+        private float dragThreshold = 10f; // 像素阈值，可根据需要调整
+
+        public override void _Input(InputEvent @event)
+        {
+            if (@event is InputEventMouseButton mouseEvent)
+            {
+                if (mouseEvent.ButtonIndex == MouseButton.Left)
+                {
+                    if (mouseEvent.Pressed)
+                    {
+                        // 鼠标按下，记录位置
+                        pressPosition = mouseEvent.Position;
+                        isDragging = false;
+                    }
+                    else
+                    {
+                        // 鼠标释放，判断是否拖拽
+                        if (!isDragging)
+                        {
+                            // 获取鼠标在世界坐标中的位置
+                            Vector2 mouseWorldPos = tileMapLayer.GetGlobalMousePosition();
+
+                            // 获取格子左上角本地坐标
+                            Vector2 mouseLocalPos = tileMapLayer.ToLocal(mouseWorldPos);
+
+                            // 转换到 TileMap 的本地格子坐标
+                            Vector2I gridPos = tileMapLayer.LocalToMap(mouseLocalPos);
+
+                            if (tileMapLayer.GetCellSourceId(gridPos) != -1)
+                            {
+                                GD.Print($"点击了格子 {gridPos}");
+
+                                // 这里可以执行你的逻辑
+                                CellExtraData cell = constructionControlNodes.get(gridPos);
+                                parent.boardManager.CallBoard(cell.construction);
+                                // 获取格子左上角本地坐标
+                                Vector2 cellLocalPos = tileMapLayer.MapToLocal(gridPos);
+                                // 转成世界坐标
+                                Vector2 forceWorldPos = tileMapLayer.ToGlobal(cellLocalPos);
+                                this.focusAppear(forceWorldPos);
+                            }
+                            else
+                            {
+                                parent.boardManager.CloseBoard();
+                                focusDisappear();
+                            }
+                        }
+                    }
+                }
+            }
+            else if (@event is InputEventMouseMotion motionEvent)
+            {
+                if (motionEvent.ButtonMask.HasFlag(MouseButtonMask.Left))
+                {
+                    // 判断移动距离是否超过阈值
+                    if (motionEvent.Position.DistanceTo(pressPosition) > dragThreshold)
+                    {
+                        isDragging = true;
+                    }
+                }
+            }
+
+        }
+
+        // 在指定位置打印聚焦圈
+        public void focusAppear(Vector2 destPos)
+        {
+            focusCircle.GlobalPosition = destPos;
+            focusCircle.Visible = (true);
+        }
+
+        // 在鼠标点击空位置时隐藏聚焦圈
+        private void focusDisappear()
+        {
+            focusCircle.Visible = false;
+            parent.boardManager.CloseBoard();
         }
     }
 }
