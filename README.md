@@ -1,4 +1,5 @@
 
+与Unity实现的比较：
 
 不使用BaseHundunScreen，直接使用GodotBaseHundunScreen  
 

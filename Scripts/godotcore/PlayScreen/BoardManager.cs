@@ -10,6 +10,7 @@ public partial class BoardManager : Node
 {
     public Dictionary<String, BaseDetailBoardController> cellDetailBoards = new();
     private BaseDetailBoardController CurrentController;
+    private BaseDetailBoardController DisapprearingController;
 
     public float Duration = 0.5f; // 移动所需时间
     public Tween.TransitionType TransitionType = Tween.TransitionType.Linear; // 缓动类型
@@ -47,76 +48,59 @@ public partial class BoardManager : Node
     }
 
     /// <summary>
-    /// 根据点击的格位种类，打印详情面板，传入true则仅更新面板数据，不打印新面板
+    /// 根据点击的格位种类，打印详情面板.
+    /// onlyUpdateData: 传入true则仅更新面板数据，不进行面板出现、消失动画
     /// </summary>
     public void CallBoard(BaseConstruction construction)
     {
+        if (CurrentController == null)
+        {
+            boardAppear(construction);
+        }
+        CurrentController.setModel(construction);
+        CurrentController.BoardUpdate();
+    }
 
-        this.CurrentController = cellDetailBoards[construction.prototypeId];
-
+    // 显示面板
+    private void boardAppear(BaseConstruction construction)
+    {
         // 当前面板更换
         foreach (var item in cellDetailBoards.Values)
         {
             item.Visible = (false);
         }
-
-        CurrentController.setModel(construction);
-        //CurrentController.BoardUpdate();
+        this.CurrentController = cellDetailBoards[construction.prototypeId];
 
         // 显示新面板
+        Vector2 screenSize = GetViewport().GetVisibleRect().Size;
+        Vector2 boardSize = CurrentController.GetRect().Size;
+        Vector2 birthPos = new Vector2((screenSize.X - boardSize.X) / 2f, screenSize.Y);
+
+        CurrentController.Visible = (true);
+        CurrentController.GlobalPosition = birthPos;
+
+        StopCoroutineBoardAnyMove();
         boardAppearMove();
     }
-
-
 
     private void boardAppearMove()
     {
         Vector2 screenSize = GetViewport().GetVisibleRect().Size;
         Vector2 screenCenter = screenSize / 2f;
         Vector2 boardSize = CurrentController.GetRect().Size;
-        Vector2 boardBirthPos = new Vector2((screenSize.X - boardSize.X)/ 2f, screenSize.Y);
         Vector2 boardPrintPos = new Vector2((screenSize.X - boardSize.X) / 2f, screenSize.Y - boardSize.Y - 10);
 
-
-        // **重要：在开始新动画前，先取消（杀死）任何正在运行的旧动画**
-        CancelMovement();
-
-        CurrentController.Visible = (true);
-        // 1. 动画开始前，立即将目标 Control 实例的位置设置为 ControlBirthPosition
-        // 注意：这里需要根据 TargetPropertyName 来设置
-        CurrentController.GlobalPosition = boardBirthPos;
-
-        // 创建一个Tween实例
+        // 创建并配置 Tween
         _currentTween = GetTree().CreateTween();
-        // 或者使用CreateTween()，它会在当前节点上创建一个Tween并返回
-        // Tween tween = CreateTween();
+        _currentTween.SetTrans(TransitionType);
+        _currentTween.SetEase(EaseType);
 
-        // 配置Tween
-        _currentTween.SetTrans(TransitionType); // 设置缓动类型 (例如: Tween.TransitionType.Linear, Tween.TransitionType.Quad)
-        _currentTween.SetEase(EaseType);       // 设置缓动模式 (例如: Tween.EaseType.InOut, Tween.EaseType.Out)
-
-        // 添加一个属性动画 (从当前位置到目标位置)
-        // tween.TweenProperty(object, property_path, final_value, duration)
+        // 执行位移
         _currentTween.TweenProperty(CurrentController, "position", boardPrintPos, Duration);
 
-        // 可以链式调用，例如在移动完成后缩放
-        // tween.TweenProperty(this, "scale", Vector3.One * 2, 0.5f);
+        // 连接信号
+        _currentTween.Finished += OnTweenFinished;
 
-        // 连接Tween完成信号
-        _currentTween.Finished += OnTweenFinished; // Godot 4 的事件订阅语法
-        // Godot 3.x 语法: tween.Connect("finished", new Callable(this, nameof(OnTweenFinished)));
-
-    }
-
-    // 新增：取消动画的方法
-    public void CancelMovement()
-    {
-        if (_currentTween != null && _currentTween.IsValid()) // 检查Tween是否存在且有效
-        {
-            _currentTween.Kill(); // 立即停止并移除Tween
-            _currentTween = null; // 清除引用
-            GD.Print("Movement cancelled!");
-        }
     }
 
     private void OnTweenFinished()
@@ -128,8 +112,49 @@ public partial class BoardManager : Node
     {
         if (CurrentController != null)
         {
-            CurrentController.Visible = false;
-            CurrentController = null;
+            StopCoroutineBoardAnyMove();
+            DisapprearingController = CurrentController;
+            this.CurrentController = null;
+            boardDisappearMove();
+        }
+    }
+
+    private void boardDisappearMove()
+    {
+        var target = DisapprearingController;
+
+        // 2. 计算目标位置 (对应 Unity 的 boardBirthPos.position)
+        Vector2 screenSize = GetViewport().GetVisibleRect().Size;
+        Vector2 boardSize = target.GetRect().Size;
+        Vector2 targetPos = new Vector2((screenSize.X - boardSize.X) / 2f, screenSize.Y);
+
+        // 3. 创建 Tween (代替 while 循环)
+        _currentTween = GetTree().CreateTween();
+
+        // 如果想模仿 SmoothDamp 的平滑感，建议使用 TransQuint 或 TransExpo
+        _currentTween.SetTrans(TransitionType);
+        _currentTween.SetEase(EaseType);
+
+        // 4. 执行位移 (对应 Vector3.SmoothDamp)
+        _currentTween.TweenProperty(target, "global_position", targetPos, Duration);
+
+        // 5. 连接完成回调 (对应循环结束后的 SetActive(false))
+        _currentTween.Finished += () =>
+        {
+            target.Visible = false;
+        };
+    }
+
+    /// <summary>
+    /// 取代unity实现
+    /// </summary>
+    private void StopCoroutineBoardAnyMove()
+    {
+        if (_currentTween != null && _currentTween.IsValid()) // 检查Tween是否存在且有效
+        {
+            _currentTween.Kill(); // 立即停止并移除Tween
+            _currentTween = null; // 清除引用
+            GD.Print("Movement cancelled!");
         }
     }
 }
