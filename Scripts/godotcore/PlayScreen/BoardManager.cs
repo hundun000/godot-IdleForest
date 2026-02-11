@@ -53,12 +53,11 @@ public partial class BoardManager : Node
     /// </summary>
     public void CallBoard(BaseConstruction construction)
     {
-        if (CurrentController == null)
+        if (CurrentController == null || CurrentController.model != construction)
         {
             boardAppear(construction);
+            CurrentController.setModel(construction);
         }
-        CurrentController.setModel(construction);
-        CurrentController.BoardUpdate();
     }
 
     // 显示面板
@@ -156,5 +155,21 @@ public partial class BoardManager : Node
             _currentTween = null; // 清除引用
             GD.Print("Movement cancelled!");
         }
+    }
+
+    /// <summary>
+    /// 收到constructions改变，board更新数据
+    /// </summary>
+    public void boardCheckRecall(List<BaseConstruction> constructions)
+    {
+        constructions.ForEach(_construction =>
+        {
+            if (CurrentController != null && CurrentController.model.saveData.position == _construction.saveData.position)
+            {
+                CallBoard(_construction);
+            }
+        });
+
+            
     }
 }

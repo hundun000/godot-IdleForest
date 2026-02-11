@@ -34,6 +34,8 @@ namespace GodotIdleForest.Scripts.godotcore
         public override void _Ready()
         { 
             base._Ready();
+            this.logicFrameHelper = new LogicFrameHelper(DemoIdleGame.LOGIC_FRAME_PER_SECOND);
+
             lazyInitLogicContext();
 
             // start area
@@ -62,6 +64,22 @@ namespace GodotIdleForest.Scripts.godotcore
                 gameAreaChangeListener.onGameAreaChange(current, current);
             }
 
+        }
+
+        protected override void onLogicFrame()
+        {
+            base.onLogicFrame();
+
+
+            foreach (ILogicFrameListener logicFrameListener in logicFrameListeners)
+            {
+                logicFrameListener.onLogicFrame();
+            }
+
+            if (logicFrameHelper.clockCount % logicFrameHelper.secondToFrameNum(10) == 0)
+            {
+                game.saveHandler.gameSaveCurrent();
+            }
         }
     }
 }

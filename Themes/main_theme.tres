@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dmc3v2858fsx4"]
+
+[ext_resource type="Texture2D" uid="uid://df1sotxf62n5j" path="res://Resources/game/board.png" id="1_8cjo3"]
+[ext_resource type="Texture2D" uid="uid://p2fffjgyr3bm" path="res://Resources/game/defaultBoardNinePatch.png" id="2_ybks7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8cjo3"]
+content_margin_left = 27.0
+content_margin_top = 13.0
+content_margin_right = 27.0
+content_margin_bottom = 13.0
+texture = ExtResource("1_8cjo3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2ta1"]
+content_margin_left = 13.0
+content_margin_top = 13.0
+content_margin_right = 13.0
+content_margin_bottom = 13.0
+texture = ExtResource("2_ybks7")
+
+[resource]
+PrimaryPanel/base_type = &"PanelContainer"
+PrimaryPanel/styles/panel = SubResource("StyleBoxTexture_8cjo3")
+SecondaryPanel/base_type = &"PanelContainer"
+SecondaryPanel/styles/panel = SubResource("StyleBoxTexture_o2ta1")

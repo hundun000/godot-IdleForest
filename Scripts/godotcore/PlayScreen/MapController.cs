@@ -138,6 +138,7 @@ namespace GodotIdleForest.Scripts.godotcore
 
         public TileMapLayer tileMapLayer;
         public Sprite2D focusCircle;       // 选中格位时显示的聚焦圈
+        private bool loadMapByLevelStart;     // 判断是否是初次加载地图
 
         public DemoPlayScreen parent;      // 通过代码绑定
         private System.Collections.Generic.Dictionary<Vector2I, CellExtraData> constructionControlNodes = new();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
@@ -171,9 +172,7 @@ namespace GodotIdleForest.Scripts.godotcore
             List<BaseConstruction> constructions = parent.game.idleGameplayExport.gameplayContext.constructionManager.getAreaControlableConstructionsOrEmpty(GameArea.AREA_SINGLE);
             constructions = filterConstructions(constructions);
 
-            BackendLevelInfo backendLevelInfo = BackendLevelInfo.from(constructions, parent.game.idleGameplayExport.stageId);
-
-            BuildBoard(backendLevelInfo);
+            BuildBoard(constructions);
 
             parent.game.frontend.log(this.getClass().getSimpleName(), "MapController change to: " + String.Join(", ",
                 constructions.Select(construction => $"{construction.name}({construction.saveData.position.x},{construction.saveData.position.y})"))
@@ -190,15 +189,14 @@ namespace GodotIdleForest.Scripts.godotcore
 
 
         // 将地图打印到屏幕上
-        private void BuildBoard(BackendLevelInfo levelInfo)
+        private void BuildBoard(List<BaseConstruction> constructions)
         {
-
             // 清理旧有地图
             tileMapLayer.Clear();
             constructionControlNodes.Clear();
 
             // 初始化地图
-            levelInfo.constructions.ForEach(construction =>
+            constructions.ForEach(construction =>
             {
                 CellExtraData cell = new();
                 cell.StateChangeTo(this, construction);
@@ -206,7 +204,7 @@ namespace GodotIdleForest.Scripts.godotcore
                 tileMapLayer.SetCell(pos, 0, cell.GetSourceId());
                 constructionControlNodes.Add(pos, cell);
             });
-
+            parent.boardManager.boardCheckRecall(constructions);
         }
 
         void ILogicFrameListener.onLogicFrame()
@@ -218,7 +216,8 @@ namespace GodotIdleForest.Scripts.godotcore
         private Vector2 pressPosition;
         private float dragThreshold = 10f; // 像素阈值，可根据需要调整
 
-        public override void _Input(InputEvent @event)
+        // 使用_UnhandledInput避免抢占UI按钮点击
+        public override void _UnhandledInput(InputEvent @event)
         {
             if (@event is InputEventMouseButton mouseEvent)
             {

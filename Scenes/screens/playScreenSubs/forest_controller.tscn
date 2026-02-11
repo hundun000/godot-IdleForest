@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://co68l3g4do5gw"]
+
+[ext_resource type="Texture2D" uid="uid://df1sotxf62n5j" path="res://Resources/game/board.png" id="1_6g81l"]
+[ext_resource type="Script" uid="uid://cpnqvfsnu67vx" path="res://Scripts/godotcore/PlayScreen/boards/ForestController.cs" id="2_6g81l"]
+[ext_resource type="Texture2D" uid="uid://3ccr4cij1hi5" path="res://Resources/game/CARBON.png" id="3_2ivx1"]
+[ext_resource type="Texture2D" uid="uid://c5wuk6opkbumq" path="res://Resources/game/Board/BoardBody/Detail.png" id="3_j4qu8"]
+[ext_resource type="Texture2D" uid="uid://bls5g68phg8ug" path="res://Resources/game/WOOD.png" id="4_6g81l"]
+[ext_resource type="PackedScene" uid="uid://c4xm02kpy8jwf" path="res://Scenes/screens/playScreenSubs/resource_value_node.tscn" id="6_ipuqb"]
+
+[node name="forestController" type="NinePatchRect"]
+offset_right = 560.0
+offset_bottom = 224.0
+texture = ExtResource("1_6g81l")
+script = ExtResource("2_6g81l")
+
+[node name="subBoard" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+
+[node name="back" type="Sprite2D" parent="subBoard"]
+position = Vector2(336.25, 72.5)
+scale = Vector2(0.77973, 0.895161)
+texture = ExtResource("3_j4qu8")
+
+[node name="inputDescription" type="Label" parent="subBoard"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 24.7739
+offset_right = 312.0
+offset_bottom = 51.7739
+text = "自动消耗："
+metadata/_edit_use_anchors_ = true
+
+[node name="inputValue" type="Label" parent="subBoard"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 26.0
+offset_right = 423.0
+offset_bottom = 49.0
+text = "TEMP"
+metadata/_edit_use_anchors_ = true
+
+[node name="inputResourceIcon" type="Sprite2D" parent="subBoard"]
+position = Vector2(328, 36)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_2ivx1")
+
+[node name="outputDescription" type="Label" parent="subBoard"]
+layout_mode = 0
+offset_left = 232.091
+offset_top = 92.1749
+offset_right = 312.091
+offset_bottom = 115.175
+text = "自动产出："
+metadata/_edit_use_anchors_ = true
+
+[node name="outputValue" type="Label" parent="subBoard"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 95.0
+offset_right = 423.0
+offset_bottom = 118.0
+text = "TEMP"
+metadata/_edit_use_anchors_ = true
+
+[node name="outputResourceIcon" type="Sprite2D" parent="subBoard"]
+position = Vector2(328, 104)
+scale = Vector2(0.255618, 0.255618)
+texture = ExtResource("4_6g81l")
+
+[node name="cut" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+
+[node name="Button" type="Button" parent="cut"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 168.0
+offset_right = 248.0
+offset_bottom = 208.0
+text = "砍伐"
+metadata/_edit_use_anchors_ = true
+
+[node name="cutOutputBack" parent="cut" instance=ExtResource("6_ipuqb")]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 192.0
+offset_right = 328.0
+offset_bottom = 192.0
+
+[node name="proficiency" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="proficiency"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 136.0
+offset_right = 112.0
+offset_bottom = 158.0
+text = "覆盖率"
+
+[node name="HSlider" type="HSlider" parent="proficiency"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 136.0
+offset_right = 488.0
+offset_bottom = 152.0
+editable = false
+scrollable = false

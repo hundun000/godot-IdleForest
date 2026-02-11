@@ -204,9 +204,5 @@ namespace hundun.idleshare.gamelib
             return getConstructionAt(position);
         }
 
-        internal void AddToRemoveQueue(BaseConstruction construction)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

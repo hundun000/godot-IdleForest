@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4xm02kpy8jwf"]
+
+[ext_resource type="Texture2D" uid="uid://bbaptjhis2so7" path="res://Resources/game/Board/Buttons/WoodOutput.png" id="1_0d8vd"]
+
+[node name="cutOutputBack" type="TextureRect"]
+texture = ExtResource("1_0d8vd")
+
+[node name="cutOutputValue" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.467153
+anchor_top = 0.5
+anchor_right = 0.467153
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 47.0
+offset_bottom = 9.0
+text = "TEMP"
+metadata/_edit_use_anchors_ = true

@@ -23,6 +23,11 @@ GameContainer="*res://Scenes/game_container.tscn"
 
 project/assembly_name="Godot-IdleForest"
 
+[gui]
+
+theme/custom="uid://dmc3v2858fsx4"
+theme/custom_font="uid://bc7xwv2xdb28s"
+
 [rendering]
 
 renderer/rendering_method="mobile"

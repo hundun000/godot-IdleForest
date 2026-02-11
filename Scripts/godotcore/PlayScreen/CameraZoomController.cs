@@ -33,7 +33,8 @@ public partial class CameraZoomController : Camera2D
         // Zoom = new Vector2(1.0f, 1.0f);
     }
 
-    public override void _Input(InputEvent @event)
+    // 使用_UnhandledInput避免抢占UI按钮点击
+    public override void _UnhandledInput(InputEvent @event)
     {
         // --- 鼠标滚轮缩放处理 ---
         if (@event is InputEventMouseButton mouseButtonEvent)

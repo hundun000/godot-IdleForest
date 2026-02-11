@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct74k5l8n2eox"]
+
+[ext_resource type="Script" uid="uid://cl0lcfgk5jo3c" path="res://Scripts/godotcore/PlayScreen/boards/subs/SubBuyBoard.cs" id="1_hkc0q"]
+[ext_resource type="Texture2D" uid="uid://bvsrcuqmsvusv" path="res://Resources/game/SMALL_TREE.png" id="2_epeui"]
+[ext_resource type="Texture2D" uid="uid://d23adg5guwpks" path="res://Resources/game/Board/Buttons/MoneyCost.png" id="3_hkc0q"]
+[ext_resource type="PackedScene" uid="uid://c4xm02kpy8jwf" path="res://Scenes/screens/playScreenSubs/resource_value_node.tscn" id="3_w0ve2"]
+
+[node name="subBuyBoard" type="PanelContainer" node_paths=PackedStringArray("_costCoinValue", "_costWoodValue", "_buyName", "_buyButton")]
+offset_right = 179.0
+offset_bottom = 262.0
+theme_type_variation = &"SecondaryPanel"
+script = ExtResource("1_hkc0q")
+_costCoinValue = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack/cutOutputValue")
+_costWoodValue = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack2/cutOutputValue")
+_buyName = NodePath("CenterContainer/VBoxContainer2/TextureRect/BuyName")
+_buyButton = NodePath("CenterContainer/VBoxContainer2/Button")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("2_epeui")
+
+[node name="BuyName" type="Label" parent="CenterContainer/VBoxContainer2/TextureRect"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 91.0
+offset_right = 89.0
+offset_bottom = 108.0
+text = "TEMP"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="cutOutputBack" parent="CenterContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("3_w0ve2")]
+layout_mode = 2
+texture = ExtResource("3_hkc0q")
+
+[node name="cutOutputBack2" parent="CenterContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("3_w0ve2")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer2"]
+layout_mode = 2
+text = "购买"
+
+[editable path="CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack"]
+[editable path="CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack2"]

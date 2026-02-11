@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://17y842vqj02c" path="res://Scripts/godotcore/PlayScreen/BoardManager.cs" id="6_jo5br"]
 [ext_resource type="Texture2D" uid="uid://df1sotxf62n5j" path="res://Resources/game/board.png" id="7_1pybp"]
 [ext_resource type="Texture2D" uid="uid://0mtopkb4wki4" path="res://Resources/game/focusCircle.png" id="7_iafwh"]
-[ext_resource type="Script" uid="uid://cpnqvfsnu67vx" path="res://Scripts/godotcore/PlayScreen/boards/ForestController.cs" id="7_p2cyt"]
+[ext_resource type="PackedScene" uid="uid://co68l3g4do5gw" path="res://Scenes/screens/playScreenSubs/forest_controller.tscn" id="8_bdjca"]
 [ext_resource type="Script" uid="uid://c130ms8wf8uqc" path="res://Scripts/godotcore/PlayScreen/boards/FactoryController.cs" id="10_eg6ol"]
-[ext_resource type="Script" uid="uid://djddk36li4ccu" path="res://Scripts/godotcore/PlayScreen/boards/DirtController.cs" id="11_w8awc"]
+[ext_resource type="PackedScene" uid="uid://ya3sdrwqo43i" path="res://Scenes/screens/playScreenSubs/dirt_controller.tscn" id="11_bdjca"]
 [ext_resource type="Script" uid="uid://c77kul44qh6qa" path="res://Scripts/godotcore/PlayScreen/boards/RubbishController.cs" id="12_bdjca"]
 [ext_resource type="Script" uid="uid://6xpm2b70tbh" path="res://Scripts/godotcore/PlayScreen/boards/LakeController.cs" id="12_w8awc"]
 [ext_resource type="Script" uid="uid://ch57ku6iifwrx" path="res://Scripts/godotcore/PlayScreen/boards/DesertController.cs" id="13_bdjca"]
@@ -74,17 +74,8 @@ script = ExtResource("6_jo5br")
 [node name="BoardManager" type="Node" parent="uiRoot/DetailBoards"]
 script = ExtResource("6_jo5br")
 
-[node name="forestController" type="NinePatchRect" parent="uiRoot/DetailBoards/BoardManager"]
+[node name="forestController" parent="uiRoot/DetailBoards/BoardManager" instance=ExtResource("8_bdjca")]
 visible = false
-offset_right = 550.0
-offset_bottom = 231.0
-texture = ExtResource("7_1pybp")
-region_rect = Rect2(0, 1, 748, 282)
-patch_margin_left = 66
-patch_margin_top = 57
-patch_margin_right = 66
-patch_margin_bottom = 51
-script = ExtResource("7_p2cyt")
 
 [node name="factoryController" type="NinePatchRect" parent="uiRoot/DetailBoards/BoardManager"]
 visible = false
@@ -98,17 +89,8 @@ patch_margin_right = 66
 patch_margin_bottom = 51
 script = ExtResource("10_eg6ol")
 
-[node name="dirtController" type="NinePatchRect" parent="uiRoot/DetailBoards/BoardManager"]
+[node name="dirtController" parent="uiRoot/DetailBoards/BoardManager" instance=ExtResource("11_bdjca")]
 visible = false
-offset_right = 550.0
-offset_bottom = 231.0
-texture = ExtResource("7_1pybp")
-region_rect = Rect2(0, 1, 748, 282)
-patch_margin_left = 66
-patch_margin_top = 57
-patch_margin_right = 66
-patch_margin_bottom = 51
-script = ExtResource("11_w8awc")
 
 [node name="rubbishController" type="NinePatchRect" parent="uiRoot/DetailBoards/BoardManager"]
 visible = false

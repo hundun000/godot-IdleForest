@@ -10,8 +10,8 @@ namespace GodotIdleForest.Scripts.godotcore.PlayScreen.boards
 {
     public abstract partial class BaseDetailBoardController : Control
     {
-        protected BaseConstruction model;
-        protected DemoPlayScreen parent;
+        public BaseConstruction model { protected set; get; }
+        public DemoPlayScreen parent { protected set; get; }
         protected BoardManager boardManager;
 
         public override void _EnterTree()
@@ -23,9 +23,12 @@ namespace GodotIdleForest.Scripts.godotcore.PlayScreen.boards
         public void setModel(BaseConstruction constructionExportData)
         {
             this.model = constructionExportData;
-            //BoardUpdate();
+            AfterSetModel();
+            BoardUpdate();
         }
 
         public abstract void BoardUpdate();
+
+        public virtual void AfterSetModel() { }
     }
 }

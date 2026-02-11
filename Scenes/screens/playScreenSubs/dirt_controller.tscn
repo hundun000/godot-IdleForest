@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://ya3sdrwqo43i"]
+
+[ext_resource type="Script" uid="uid://djddk36li4ccu" path="res://Scripts/godotcore/PlayScreen/boards/DirtController.cs" id="2_mw63w"]
+[ext_resource type="PackedScene" uid="uid://ct74k5l8n2eox" path="res://Scenes/screens/playScreenSubs/sub_buy_board.tscn" id="3_mw63w"]
+[ext_resource type="Texture2D" uid="uid://bqidm8y25qmq0" path="res://Resources/game/SMALL_FACTORY.png" id="3_x5o4g"]
+
+[node name="dirtController" type="PanelContainer" node_paths=PackedStringArray("subBuyForestBoard", "subBuyFactoryBoard")]
+offset_right = 349.0
+offset_bottom = 310.0
+theme_type_variation = &"PrimaryPanel"
+script = ExtResource("2_mw63w")
+subBuyForestBoard = NodePath("CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard")
+subBuyFactoryBoard = NodePath("CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard2")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "土地"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="subBuyBoard" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_mw63w")]
+layout_mode = 2
+
+[node name="cutOutputBack2" parent="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard/CenterContainer/VBoxContainer2/VBoxContainer" index="1"]
+visible = false
+
+[node name="subBuyBoard2" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_mw63w")]
+layout_mode = 2
+
+[node name="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard2/CenterContainer/VBoxContainer2" index="0"]
+texture = ExtResource("3_x5o4g")
+
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard"]
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard/CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack"]
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard/CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack2"]
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard2"]
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard2/CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack"]
+[editable path="CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard2/CenterContainer/VBoxContainer2/VBoxContainer/cutOutputBack2"]
