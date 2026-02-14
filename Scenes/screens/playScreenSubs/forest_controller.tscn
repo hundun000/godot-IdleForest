@@ -1,21 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://co68l3g4do5gw"]
+[gd_scene load_steps=6 format=3 uid="uid://co68l3g4do5gw"]
 
-[ext_resource type="Texture2D" uid="uid://df1sotxf62n5j" path="res://Resources/game/board.png" id="1_6g81l"]
 [ext_resource type="Script" uid="uid://cpnqvfsnu67vx" path="res://Scripts/godotcore/PlayScreen/boards/ForestController.cs" id="2_6g81l"]
 [ext_resource type="Texture2D" uid="uid://3ccr4cij1hi5" path="res://Resources/game/CARBON.png" id="3_2ivx1"]
 [ext_resource type="Texture2D" uid="uid://c5wuk6opkbumq" path="res://Resources/game/Board/BoardBody/Detail.png" id="3_j4qu8"]
 [ext_resource type="Texture2D" uid="uid://bls5g68phg8ug" path="res://Resources/game/WOOD.png" id="4_6g81l"]
 [ext_resource type="PackedScene" uid="uid://c4xm02kpy8jwf" path="res://Scenes/screens/playScreenSubs/resource_value_node.tscn" id="6_ipuqb"]
 
-[node name="forestController" type="NinePatchRect"]
-offset_right = 560.0
-offset_bottom = 224.0
-texture = ExtResource("1_6g81l")
+[node name="forestController" type="PanelContainer" node_paths=PackedStringArray("_inputValue", "_outputValue", "_cutBtn", "_cutOutputValue", "_proficiencySlider")]
+offset_right = 544.0
+offset_bottom = 240.0
+theme_type_variation = &"PrimaryPanel"
 script = ExtResource("2_6g81l")
+_inputValue = NodePath("subBoard/inputValue")
+_outputValue = NodePath("subBoard/outputValue")
+_cutBtn = NodePath("cut/Button")
+_cutOutputValue = NodePath("cut/cutOutputBack/cutOutputValue")
+_proficiencySlider = NodePath("proficiency/HSlider")
 
 [node name="subBoard" type="Control" parent="."]
 layout_mode = 2
-anchors_preset = 0
 
 [node name="back" type="Sprite2D" parent="subBoard"]
 position = Vector2(336.25, 72.5)
@@ -70,7 +73,6 @@ texture = ExtResource("4_6g81l")
 
 [node name="cut" type="Control" parent="."]
 layout_mode = 2
-anchors_preset = 0
 
 [node name="Button" type="Button" parent="cut"]
 layout_mode = 0
@@ -83,14 +85,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="cutOutputBack" parent="cut" instance=ExtResource("6_ipuqb")]
 layout_mode = 0
-offset_left = 328.0
-offset_top = 192.0
-offset_right = 328.0
-offset_bottom = 192.0
+offset_left = 264.0
+offset_top = 176.0
+offset_right = 401.0
+offset_bottom = 208.0
 
 [node name="proficiency" type="Control" parent="."]
 layout_mode = 2
-anchors_preset = 0
 
 [node name="Label" type="Label" parent="proficiency"]
 layout_mode = 0
@@ -108,3 +109,5 @@ offset_right = 488.0
 offset_bottom = 152.0
 editable = false
 scrollable = false
+
+[editable path="cut/cutOutputBack"]

@@ -18,6 +18,8 @@ content_margin_bottom = 13.0
 texture = ExtResource("2_ybks7")
 
 [resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
 PrimaryPanel/base_type = &"PanelContainer"
 PrimaryPanel/styles/panel = SubResource("StyleBoxTexture_8cjo3")
 SecondaryPanel/base_type = &"PanelContainer"
