@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bbksl2m4yu2te"]
+[gd_scene load_steps=28 format=4 uid="uid://bbksl2m4yu2te"]
 
 [ext_resource type="Script" uid="uid://dd36rneq71iqg" path="res://Scripts/godotcore/PlayScreen/CameraZoomController.cs" id="1_72qwf"]
 [ext_resource type="Texture2D" uid="uid://cx484r8tuqryc" path="res://Resources/game/Sky.png" id="1_2721e"]
@@ -21,6 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://dfqbpxvj5o344" path="res://Resources/UI/red.png" id="13_4lpgy"]
 [ext_resource type="Script" uid="uid://ch57ku6iifwrx" path="res://Scripts/godotcore/PlayScreen/boards/DesertController.cs" id="13_bdjca"]
 [ext_resource type="Texture2D" uid="uid://784n2bwdt7m0" path="res://Resources/UI/red line.png" id="13_s26eb"]
+[ext_resource type="Script" uid="uid://beg1sf02rn3wm" path="res://Scripts/godotcore/PlayScreen/huds/StockManager.cs" id="14_1xy1v"]
+[ext_resource type="PackedScene" uid="uid://iiglcomstale" path="res://Scenes/screens/playScreenSubs/resource_stock_node.tscn" id="14_4lpgy"]
+[ext_resource type="Texture2D" uid="uid://c2uq7bg7n184t" path="res://Resources/game/MenuScene/TutorialBtn.png" id="15_5rmj3"]
+[ext_resource type="Texture2D" uid="uid://dwbhomit6687a" path="res://Resources/UI/wooden.png" id="16_1xy1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_72qwf"]
 texture = ExtResource("2_wqdcv")
@@ -81,9 +85,9 @@ layer = 10
 
 [node name="StatusBarController" type="Node" parent="hudRoot" node_paths=PackedStringArray("carbonValue", "carbonBars", "carbonStateIcons")]
 script = ExtResource("7_nmmew")
-carbonValue = NodePath("../Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonValue")
-carbonBars = [NodePath("../Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonBarsLocator/carbonBars0"), NodePath("../Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonBarsLocator/carbonBars1"), NodePath("../Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonBarsLocator/carbonBars2")]
-carbonStateIcons = NodePath("../Control/MarginContainer/lefttop/VBoxContainer/Carbon/img")
+carbonValue = NodePath("../Control/MarginContainer/lefttop/rows/Carbon/carbonValue")
+carbonBars = [NodePath("../Control/MarginContainer/lefttop/rows/Carbon/carbonBarsLocator/carbonBars0"), NodePath("../Control/MarginContainer/lefttop/rows/Carbon/carbonBarsLocator/carbonBars1"), NodePath("../Control/MarginContainer/lefttop/rows/Carbon/carbonBarsLocator/carbonBars2")]
+carbonStateIcons = NodePath("../Control/MarginContainer/lefttop/rows/Carbon/img")
 carbonStateIconsSprite = Array[Texture2D]([ExtResource("7_r0isx"), ExtResource("12_s26eb"), ExtResource("13_4lpgy")])
 carbonBarDividingLines = PackedFloat32Array(0, 20000, 60000, 100000)
 
@@ -115,16 +119,16 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="hudRoot/Control/MarginContainer/lefttop"]
+[node name="rows" type="VBoxContainer" parent="hudRoot/Control/MarginContainer/lefttop"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 50.0
+offset_bottom = 50.0
 
-[node name="Carbon" type="Control" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer"]
+[node name="Carbon" type="Control" parent="hudRoot/Control/MarginContainer/lefttop/rows"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="img" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer/Carbon"]
+[node name="img" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/rows/Carbon"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,7 +138,7 @@ grow_vertical = 2
 texture = ExtResource("7_r0isx")
 expand_mode = 1
 
-[node name="carbonValue" type="Label" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer/Carbon"]
+[node name="carbonValue" type="Label" parent="hudRoot/Control/MarginContainer/lefttop/rows/Carbon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -149,7 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "TEMP"
 
-[node name="carbonBarsLocator" type="Control" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer/Carbon"]
+[node name="carbonBarsLocator" type="Control" parent="hudRoot/Control/MarginContainer/lefttop/rows/Carbon"]
 clip_contents = true
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 0
@@ -158,7 +162,7 @@ offset_top = 6.0
 offset_right = 656.0
 offset_bottom = 56.0
 
-[node name="carbonBars2" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonBarsLocator"]
+[node name="carbonBars2" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/rows/Carbon/carbonBarsLocator"]
 layout_mode = 1
 offset_right = 1091.0
 offset_bottom = 91.0
@@ -166,7 +170,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("13_s26eb")
 stretch_mode = 2
 
-[node name="carbonBars1" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonBarsLocator"]
+[node name="carbonBars1" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/rows/Carbon/carbonBarsLocator"]
 layout_mode = 1
 offset_right = 829.0
 offset_bottom = 90.0
@@ -174,13 +178,66 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_4lpgy")
 stretch_mode = 2
 
-[node name="carbonBars0" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/VBoxContainer/Carbon/carbonBarsLocator"]
+[node name="carbonBars0" type="TextureRect" parent="hudRoot/Control/MarginContainer/lefttop/rows/Carbon/carbonBarsLocator"]
 layout_mode = 1
 offset_right = 401.0
 offset_bottom = 90.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_s26eb")
 stretch_mode = 2
+
+[node name="righttop" type="Control" parent="hudRoot/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="rows" type="VBoxContainer" parent="hudRoot/Control/MarginContainer/righttop"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -430.0
+offset_bottom = 120.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="row0" type="HBoxContainer" parent="hudRoot/Control/MarginContainer/righttop/rows"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StockManager" type="HBoxContainer" parent="hudRoot/Control/MarginContainer/righttop/rows/row0" node_paths=PackedStringArray("moneyText", "woodText", "moneyChangeText", "woodChangeText")]
+layout_mode = 2
+script = ExtResource("14_1xy1v")
+moneyText = NodePath("MoneyNode/value")
+woodText = NodePath("WoodNode/value")
+moneyChangeText = NodePath("MoneyNode/changeValue")
+woodChangeText = NodePath("WoodNode/changeValue")
+
+[node name="MoneyNode" parent="hudRoot/Control/MarginContainer/righttop/rows/row0/StockManager" instance=ExtResource("14_4lpgy")]
+layout_mode = 2
+
+[node name="WoodNode" parent="hudRoot/Control/MarginContainer/righttop/rows/row0/StockManager" instance=ExtResource("14_4lpgy")]
+layout_mode = 2
+texture = ExtResource("16_1xy1v")
+
+[node name="TextureButton" type="TextureButton" parent="hudRoot/Control/MarginContainer/righttop/rows/row0"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("15_5rmj3")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureButton2" type="TextureButton" parent="hudRoot/Control/MarginContainer/righttop/rows/row0"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("15_5rmj3")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="DetailBoards" type="Node" parent="hudRoot/Control"]
 script = ExtResource("6_jo5br")
@@ -241,3 +298,6 @@ patch_margin_top = 57
 patch_margin_right = 66
 patch_margin_bottom = 51
 script = ExtResource("13_bdjca")
+
+[editable path="hudRoot/Control/MarginContainer/righttop/rows/row0/StockManager/MoneyNode"]
+[editable path="hudRoot/Control/MarginContainer/righttop/rows/row0/StockManager/WoodNode"]

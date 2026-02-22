@@ -15,8 +15,9 @@ namespace GodotIdleForest.Scripts.godotcore
         public MapController mapController;
         public BoardManager boardManager;
         public StatusBarController statusBarController;
+		public StockManager stockManager;
 
-        protected List<ILogicFrameListener> logicFrameListeners = new List<ILogicFrameListener>();
+		protected List<ILogicFrameListener> logicFrameListeners = new List<ILogicFrameListener>();
         protected List<IGameAreaChangeListener> gameAreaChangeListeners = new List<IGameAreaChangeListener>();
 
 
@@ -29,9 +30,10 @@ namespace GodotIdleForest.Scripts.godotcore
             mapController = GodotUtils.FindFirstChildOfType<MapController>(this);
             boardManager = GodotUtils.FindFirstChildOfType<BoardManager>(this);
             statusBarController = GodotUtils.FindFirstChildOfType<StatusBarController>(this);
-            // lazyInitUiRootContext() 不再需要(优先使用Godot的开发习惯)，由Godot引擎自行自上而下访问_EnterTree
+			stockManager = GodotUtils.FindFirstChildOfType<StockManager>(this);
+			// lazyInitUiRootContext() 不再需要(优先使用Godot的开发习惯)，由Godot引擎自行自上而下访问_EnterTree
 
-        }
+		}
 
         public override void _Ready()
         { 
@@ -55,7 +57,8 @@ namespace GodotIdleForest.Scripts.godotcore
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(statusBarController);
             this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(mapController);
-        }
+			this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(stockManager);
+		}
 
 
 
