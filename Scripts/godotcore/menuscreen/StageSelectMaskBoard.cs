@@ -19,16 +19,16 @@ public partial class StageSelectMaskBoard : PopupPanel
 
         var texts = parent.game.idleGameplayExport.gameDictionary.getStageSelectMaskBoardTexts(parent.game.idleGameplayExport.language);
         List<TextureButton> stageButtons = GodotUtils.FindAllChildrenOfType<TextureButton>(this).Where(it => it.Name.Equals("stageButton")).ToList();
-        List<TextureLabel> textureLabels = GodotUtils.FindAllChildrenOfType<TextureLabel>(this).Where(it => it.Name.Equals("stageName")).ToList();
+        List<Label> textureLabels = GodotUtils.FindAllChildrenOfType<Label>(this).Where(it => it.Name.Equals("stageName")).ToList();
 
         
         for (int i = 0; i < stageButtons.Count; i++)
         {
-            textureLabels[i].TextLabel.Text = texts[i + 1];
+            textureLabels[i].Text = texts[i + 1];
             stageButtons[i].Pressed += () => {
                 GD.Print($"stageButtons{i} Pressed");
                 parent.game.saveHandler.gameplayLoadOrStarter(0);
-                GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToPacked, GameContainer.SceneManager.DemoPlayScreen);
+                GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToPacked, GameContainer.Instance.SceneManager.DemoPlayScreen);
                 //GetTree().ChangeSceneToPacked(GameContainer.SceneManager.DemoPlayScreen);
             };
         }

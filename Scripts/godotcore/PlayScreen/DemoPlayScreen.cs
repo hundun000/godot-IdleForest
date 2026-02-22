@@ -53,7 +53,8 @@ namespace GodotIdleForest.Scripts.godotcore
             logicFrameListeners.Add(game.idleGameplayExport);
             logicFrameListeners.Add(statusBarController);
             logicFrameListeners.Add(mapController);
-
+			logicFrameListeners.Add(boardManager);
+			
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(statusBarController);
             this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(mapController);

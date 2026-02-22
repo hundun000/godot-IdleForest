@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://ya3sdrwqo43i"]
+
+[ext_resource type="Script" uid="uid://djddk36li4ccu" path="res://Scripts/godotcore/PlayScreen/boards/DirtController.cs" id="1_6k4uv"]
+[ext_resource type="PackedScene" uid="uid://ct74k5l8n2eox" path="res://Scenes/screens/playScreenSubs/sub_buy_board.tscn" id="2_3vr4u"]
+
+[node name="dirtController" type="PanelContainer" node_paths=PackedStringArray("subBuyForestBoard", "subBuyFactoryBoard")]
+offset_right = 349.0
+offset_bottom = 310.0
+theme_type_variation = &"PrimaryPanel"
+script = ExtResource("1_6k4uv")
+subBuyForestBoard = NodePath("CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard")
+subBuyFactoryBoard = NodePath("CenterContainer/VBoxContainer/HBoxContainer/subBuyBoard2")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "土地"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="subBuyBoard" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_3vr4u")]
+layout_mode = 2
+
+[node name="subBuyBoard2" parent="CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_3vr4u")]
+layout_mode = 2

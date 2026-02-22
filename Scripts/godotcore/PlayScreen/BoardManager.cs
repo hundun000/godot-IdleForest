@@ -3,10 +3,11 @@ using Godot;
 using GodotIdleForest.Scripts.godotcore;
 using GodotIdleForest.Scripts.godotcore.PlayScreen.boards;
 using hundun.idleshare.gamelib;
+using hundun.unitygame.gamelib;
 using System;
 using System.Collections.Generic;
 
-public partial class BoardManager : Node
+public partial class BoardManager : Node, ILogicFrameListener
 {
     public Dictionary<String, BaseDetailBoardController> cellDetailBoards = new();
     private BaseDetailBoardController CurrentController;
@@ -66,7 +67,10 @@ public partial class BoardManager : Node
         // 当前面板更换
         foreach (var item in cellDetailBoards.Values)
         {
-            item.Visible = (false);
+            if (item != null)
+            {
+                item.Visible = (false);
+            }
         }
         this.CurrentController = cellDetailBoards[construction.prototypeId];
 
@@ -171,5 +175,13 @@ public partial class BoardManager : Node
         });
 
             
+    }
+
+    void ILogicFrameListener.onLogicFrame()
+    {
+        if (this.CurrentController != null)
+        {
+            CurrentController.onLogicFrame();
+        }
     }
 }

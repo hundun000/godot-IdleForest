@@ -58,7 +58,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
                     ResourceType.COIN, 30,
-                    ResourceType.CARBON, 200
+                    ResourceType.CARBON, 2
                     )));
 
             construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(

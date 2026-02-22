@@ -19,7 +19,7 @@ public partial class DemoMenuScreen : GodotBaseHundunScreen
         GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_EnterTree 开始");
         base._EnterTree();
 
-        if (!GameContainer.Game.saveHandler.hasContinuedGameplaySave())
+        if (!GameContainer.Instance.Game.saveHandler.hasContinuedGameplaySave())
         {
             ContinueGameButton.Visible = false;
         }

@@ -6,6 +6,6 @@ public partial class RubbishController : BaseDetailBoardController
 {
     public override void BoardUpdate()
     {
-        throw new NotImplementedException();
+        
     }
 }

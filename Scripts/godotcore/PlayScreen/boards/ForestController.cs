@@ -18,18 +18,26 @@ public partial class ForestController : BaseDetailBoardController
     Label _cutOutputValue;
     [Export]
     Slider _proficiencySlider;
+    [Export]
+    Label _proficiencyValue;
     public override void BoardUpdate()
     {
-        // ------ update text ------
-        _inputValue.Text = model.outputComponent.outputCostPack.modifiedValues[0].amount.ToString();
-        _outputValue.Text = model.outputComponent.outputCostPack.modifiedValues[0].amount.ToString();
-        _cutOutputValue.Text = model.existenceComponent.destoryGainPack.modifiedValues[0].amount.ToString();
-
-        // ------ update clickable-state ------
-        if (model.existenceComponent.canDestory()) _cutBtn.Disabled = (false);
-        else _cutBtn.Disabled = (true);
-
-        // ------ update proficiency------
-        _proficiencySlider.Value = model.saveData.proficiency;
+        onLogicFrame();
     }
+
+    public override void onLogicFrame()
+    {
+		// ------ update text ------
+		_inputValue.Text = model.outputComponent.outputCostPack.modifiedValues[0].amount.ToString();
+		_outputValue.Text = model.outputComponent.outputGainPack.modifiedValues[0].amount.ToString();
+		_cutOutputValue.Text = model.existenceComponent.destoryGainPack.modifiedValues[0].amount.ToString();
+
+		// ------ update clickable-state ------
+		if (model.existenceComponent.canDestory()) _cutBtn.Disabled = (false);
+		else _cutBtn.Disabled = (true);
+
+		// ------ update proficiency------
+		_proficiencySlider.Value = model.saveData.proficiency;
+		_proficiencyValue.Text = model.saveData.proficiency + "%";
+	}
 }

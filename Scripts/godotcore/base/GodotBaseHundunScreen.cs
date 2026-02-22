@@ -15,7 +15,7 @@ namespace GodotIdleForest.Scripts.godotcore
         public override void _EnterTree()
         {
             GD.Print(JavaFeatureExtension.getClass(this).getSimpleName() + "_EnterTree开始");
-            this.game = GameContainer.Game;
+            this.game = GameContainer.Instance.Game;
         }
 
         public override void _Process(double delta)

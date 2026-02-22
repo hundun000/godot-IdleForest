@@ -1,11 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4xm02kpy8jwf"]
+[gd_scene load_steps=4 format=3 uid="uid://c4xm02kpy8jwf"]
 
-[ext_resource type="Texture2D" uid="uid://bbaptjhis2so7" path="res://Resources/game/Board/Buttons/WoodOutput.png" id="1_0d8vd"]
+[ext_resource type="Texture2D" uid="uid://bvpmgpka4ypjy" path="res://Resources/game/Board/Buttons/EmptyCost.png" id="1_x3nvq"]
+[ext_resource type="Script" uid="uid://dhb1ckb512dpc" path="res://Scripts/godotcore/base/ResourcePairVM.cs" id="2_5l3u5"]
+[ext_resource type="Texture2D" uid="uid://cglwhqthh4e4" path="res://Resources/game/TempResource.png" id="3_5l3u5"]
 
-[node name="cutOutputBack" type="TextureRect"]
-texture = ExtResource("1_0d8vd")
+[node name="resource_pair" type="TextureRect" node_paths=PackedStringArray("Icon", "Value")]
+texture = ExtResource("1_x3nvq")
+script = ExtResource("2_5l3u5")
+Icon = NodePath("icon")
+Value = NodePath("value")
 
-[node name="cutOutputValue" type="Label" parent="."]
+[node name="icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 41.0
+offset_bottom = 24.0
+texture = ExtResource("3_5l3u5")
+expand_mode = 1
+
+[node name="value" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.467153

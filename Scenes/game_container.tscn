@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c43xf6ey7tdsq"]
+[gd_scene load_steps=5 format=3 uid="uid://c43xf6ey7tdsq"]
 
 [ext_resource type="Script" uid="uid://c55gm2iq5wd02" path="res://Scripts/godotcore/adapter/global/GameContainer.cs" id="1_lckmn"]
 [ext_resource type="Script" uid="uid://dvyabtvgdd8s2" path="res://Scripts/godotcore/adapter/global/SceneManager.cs" id="2_jr5s5"]
+[ext_resource type="Resource" uid="uid://bke4iy6rb246b" path="res://Scenes/TextureLibrary.tres" id="2_juifl"]
 [ext_resource type="PackedScene" uid="uid://bbksl2m4yu2te" path="res://Scenes/screens/demo_play_screen.tscn" id="3_jr5s5"]
 
-[node name="GameContainer" type="Node"]
+[node name="GameContainer" type="Node" node_paths=PackedStringArray("SceneManager")]
 script = ExtResource("1_lckmn")
+SceneManager = NodePath("SceneManager")
+TextureLib = ExtResource("2_juifl")
 
 [node name="SceneManager" type="Node" parent="."]
 script = ExtResource("2_jr5s5")

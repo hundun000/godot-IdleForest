@@ -4,6 +4,7 @@ using System;
 
 public partial class FactoryController : BaseDetailBoardController
 {
+
     public override void BoardUpdate()
     {
         throw new NotImplementedException();

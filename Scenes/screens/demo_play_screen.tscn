@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bbksl2m4yu2te"]
+[gd_scene load_steps=24 format=4 uid="uid://bbksl2m4yu2te"]
 
 [ext_resource type="Script" uid="uid://dd36rneq71iqg" path="res://Scripts/godotcore/PlayScreen/CameraZoomController.cs" id="1_72qwf"]
 [ext_resource type="Texture2D" uid="uid://cx484r8tuqryc" path="res://Resources/game/Sky.png" id="1_2721e"]
@@ -6,25 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://ngepiirskoh7" path="res://Resources/game/CellIcons.png" id="2_wqdcv"]
 [ext_resource type="Script" uid="uid://dafoon30uxisi" path="res://Scripts/godotcore/PlayScreen/MapController.cs" id="5_mdgi3"]
 [ext_resource type="Script" uid="uid://17y842vqj02c" path="res://Scripts/godotcore/PlayScreen/BoardManager.cs" id="6_jo5br"]
-[ext_resource type="Texture2D" uid="uid://df1sotxf62n5j" path="res://Resources/game/board.png" id="7_1pybp"]
 [ext_resource type="Texture2D" uid="uid://0mtopkb4wki4" path="res://Resources/game/focusCircle.png" id="7_iafwh"]
 [ext_resource type="Script" uid="uid://cwwc44sqwg61i" path="res://Scripts/godotcore/PlayScreen/huds/StatusBarController.cs" id="7_nmmew"]
 [ext_resource type="Texture2D" uid="uid://bkbhrncf4equb" path="res://Resources/UI/green.png" id="7_r0isx"]
-[ext_resource type="PackedScene" uid="uid://co68l3g4do5gw" path="res://Scenes/screens/playScreenSubs/forest_controller.tscn" id="8_bdjca"]
-[ext_resource type="Script" uid="uid://c130ms8wf8uqc" path="res://Scripts/godotcore/PlayScreen/boards/FactoryController.cs" id="10_eg6ol"]
-[ext_resource type="PackedScene" uid="uid://ya3sdrwqo43i" path="res://Scenes/screens/playScreenSubs/dirt_controller.tscn" id="11_bdjca"]
+[ext_resource type="PackedScene" uid="uid://co68l3g4do5gw" path="res://Scenes/screens/playScreenSubs/singletons/forest_controller.tscn" id="8_bdjca"]
+[ext_resource type="PackedScene" uid="uid://ya3sdrwqo43i" path="res://Scenes/screens/playScreenSubs/singletons/dirt_controller.tscn" id="11_bdjca"]
 [ext_resource type="Texture2D" uid="uid://cpk7f37hilqa" path="res://Resources/UI/greeen line.png" id="11_s26eb"]
 [ext_resource type="Texture2D" uid="uid://d286gyowjwjdr" path="res://Resources/UI/yellow line.png" id="12_4lpgy"]
-[ext_resource type="Script" uid="uid://c77kul44qh6qa" path="res://Scripts/godotcore/PlayScreen/boards/RubbishController.cs" id="12_bdjca"]
 [ext_resource type="Texture2D" uid="uid://3t4rtx2vetm1" path="res://Resources/UI/yellow.png" id="12_s26eb"]
-[ext_resource type="Script" uid="uid://6xpm2b70tbh" path="res://Scripts/godotcore/PlayScreen/boards/LakeController.cs" id="12_w8awc"]
 [ext_resource type="Texture2D" uid="uid://dfqbpxvj5o344" path="res://Resources/UI/red.png" id="13_4lpgy"]
-[ext_resource type="Script" uid="uid://ch57ku6iifwrx" path="res://Scripts/godotcore/PlayScreen/boards/DesertController.cs" id="13_bdjca"]
 [ext_resource type="Texture2D" uid="uid://784n2bwdt7m0" path="res://Resources/UI/red line.png" id="13_s26eb"]
 [ext_resource type="Script" uid="uid://beg1sf02rn3wm" path="res://Scripts/godotcore/PlayScreen/huds/StockManager.cs" id="14_1xy1v"]
 [ext_resource type="PackedScene" uid="uid://iiglcomstale" path="res://Scenes/screens/playScreenSubs/resource_stock_node.tscn" id="14_4lpgy"]
 [ext_resource type="Texture2D" uid="uid://c2uq7bg7n184t" path="res://Resources/game/MenuScene/TutorialBtn.png" id="15_5rmj3"]
 [ext_resource type="Texture2D" uid="uid://dwbhomit6687a" path="res://Resources/UI/wooden.png" id="16_1xy1v"]
+[ext_resource type="PackedScene" uid="uid://dxp2v8n2ymkw2" path="res://Scenes/screens/playScreenSubs/singletons/factory_controller.tscn" id="21_s26eb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_72qwf"]
 texture = ExtResource("2_wqdcv")
@@ -76,9 +72,6 @@ tile_set = SubResource("TileSet_2721e")
 position = Vector2(455, 332)
 scale = Vector2(0.198125, 0.198125)
 texture = ExtResource("7_iafwh")
-
-[node name="uiRoot" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="hudRoot" type="CanvasLayer" parent="."]
 layer = 10
@@ -248,56 +241,11 @@ script = ExtResource("6_jo5br")
 [node name="forestController" parent="hudRoot/Control/DetailBoards/BoardManager" instance=ExtResource("8_bdjca")]
 visible = false
 
-[node name="factoryController" type="NinePatchRect" parent="hudRoot/Control/DetailBoards/BoardManager"]
-visible = false
-offset_right = 550.0
-offset_bottom = 231.0
-texture = ExtResource("7_1pybp")
-region_rect = Rect2(0, 1, 748, 282)
-patch_margin_left = 66
-patch_margin_top = 57
-patch_margin_right = 66
-patch_margin_bottom = 51
-script = ExtResource("10_eg6ol")
-
 [node name="dirtController" parent="hudRoot/Control/DetailBoards/BoardManager" instance=ExtResource("11_bdjca")]
 visible = false
 
-[node name="rubbishController" type="NinePatchRect" parent="hudRoot/Control/DetailBoards/BoardManager"]
+[node name="factoryController" parent="hudRoot/Control/DetailBoards/BoardManager" instance=ExtResource("21_s26eb")]
 visible = false
-offset_right = 550.0
-offset_bottom = 231.0
-texture = ExtResource("7_1pybp")
-region_rect = Rect2(0, 1, 748, 282)
-patch_margin_left = 66
-patch_margin_top = 57
-patch_margin_right = 66
-patch_margin_bottom = 51
-script = ExtResource("12_bdjca")
-
-[node name="lakeController" type="NinePatchRect" parent="hudRoot/Control/DetailBoards/BoardManager"]
-visible = false
-offset_right = 550.0
-offset_bottom = 231.0
-texture = ExtResource("7_1pybp")
-region_rect = Rect2(0, 1, 748, 282)
-patch_margin_left = 66
-patch_margin_top = 57
-patch_margin_right = 66
-patch_margin_bottom = 51
-script = ExtResource("12_w8awc")
-
-[node name="desertController" type="NinePatchRect" parent="hudRoot/Control/DetailBoards/BoardManager"]
-visible = false
-offset_right = 550.0
-offset_bottom = 231.0
-texture = ExtResource("7_1pybp")
-region_rect = Rect2(0, 1, 748, 282)
-patch_margin_left = 66
-patch_margin_top = 57
-patch_margin_right = 66
-patch_margin_bottom = 51
-script = ExtResource("13_bdjca")
 
 [editable path="hudRoot/Control/MarginContainer/righttop/rows/row0/StockManager/MoneyNode"]
 [editable path="hudRoot/Control/MarginContainer/righttop/rows/row0/StockManager/WoodNode"]

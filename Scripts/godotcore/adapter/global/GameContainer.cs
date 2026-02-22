@@ -7,17 +7,25 @@ using System.Text;
 
 public partial class GameContainer : Node
 {
-	public static DemoIdleGame Game
+	public static GameContainer Instance { get; private set; }
+
+	public DemoIdleGame Game
 	{
 		get; private set;
 	}
 
-    public static SceneManager SceneManager
+	[Export]
+	public SceneManager SceneManager
     {
         get; private set;
     }
 
-    internal static class NativeMethods
+	[Export] 
+    public TextureLibrary TextureLib;
+
+
+
+	internal static class NativeMethods
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern int AllocConsole();
@@ -62,17 +70,19 @@ public partial class GameContainer : Node
         }
     }
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _EnterTree()
+	// Called when the node enters the scene tree for the first time.
+	public override void _EnterTree()
 	{
         // 只有在 Windows 平台上才需要设置控制台
         #if GODOT_WINDOWS
         NativeMethods.SetupConsoleForUtf8();
-        #endif
+#endif
 
-        SceneManager = GodotUtils.FindFirstChildOfType<SceneManager>(this);
-        Game = new DemoIdleGame();
-		Game.create();
+		Instance = this;
+		TextureLib.Initialize();
+
+		this.Game = new DemoIdleGame();
+		this.Game.create();
 	}
 
 }
