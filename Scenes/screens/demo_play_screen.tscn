@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dfqbpxvj5o344" path="res://Resources/UI/red.png" id="13_4lpgy"]
 [ext_resource type="Texture2D" uid="uid://784n2bwdt7m0" path="res://Resources/UI/red line.png" id="13_s26eb"]
 [ext_resource type="Script" uid="uid://beg1sf02rn3wm" path="res://Scripts/godotcore/PlayScreen/huds/StockManager.cs" id="14_1xy1v"]
-[ext_resource type="PackedScene" uid="uid://iiglcomstale" path="res://Scenes/screens/playScreenSubs/resource_stock_node.tscn" id="14_4lpgy"]
+[ext_resource type="PackedScene" uid="uid://iiglcomstale" path="res://Scenes/base/resource_stock_node.tscn" id="14_4lpgy"]
 [ext_resource type="Texture2D" uid="uid://c2uq7bg7n184t" path="res://Resources/game/MenuScene/TutorialBtn.png" id="15_5rmj3"]
 [ext_resource type="Texture2D" uid="uid://dwbhomit6687a" path="res://Resources/UI/wooden.png" id="16_1xy1v"]
 [ext_resource type="PackedScene" uid="uid://dxp2v8n2ymkw2" path="res://Scenes/screens/playScreenSubs/singletons/factory_controller.tscn" id="21_s26eb"]

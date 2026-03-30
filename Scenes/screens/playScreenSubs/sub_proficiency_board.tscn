@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://faajitw1u4pa"]
+
+[ext_resource type="Script" uid="uid://eusl1ysrieul" path="res://Scripts/godotcore/PlayScreen/boards/subs/SubProficiencyBoard.cs" id="1_825m7"]
+
+[node name="proficiency" type="Control" node_paths=PackedStringArray("proficiencySlider", "proficiencyValue")]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_825m7")
+proficiencySlider = NodePath("HSlider")
+proficiencyValue = NodePath("Value")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 22.0
+text = "覆盖率"
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 1.0
+offset_right = 99.0
+offset_bottom = 18.0
+text = "TEMP"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 3.0
+offset_right = 461.0
+offset_bottom = 19.0
+editable = false
+scrollable = false

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvr7gwh6wvu4b"]
+
+[ext_resource type="Script" uid="uid://tupr5y6jrqh8" path="res://Scripts/godotcore/PlayScreen/boards/subs/SubDestoryBoard.cs" id="1_nfxvj"]
+[ext_resource type="PackedScene" uid="uid://b3hvtwy7qhrvj" path="res://Scenes/base/resource_line.tscn" id="2_nfxvj"]
+
+[node name="destory" type="Control" node_paths=PackedStringArray("button", "gainLineVM")]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_nfxvj")
+button = NodePath("Button")
+gainLineVM = NodePath("ResourceLine")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 88.0
+offset_bottom = 40.0
+text = "拆除"
+
+[node name="ResourceLine" parent="." instance=ExtResource("2_nfxvj")]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 525.0
+offset_bottom = 38.0

@@ -1,6 +1,7 @@
 using Assets.Scripts.DemoGameCore.logic;
 using Godot;
 using Godot.Collections;
+using GodotIdleForest.Scripts.godotcore;
 using GodotIdleForest.Scripts.godotcore.PlayScreen.boards;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
@@ -12,10 +13,11 @@ public partial class SubBuyBoard : PanelContainer
 {
     BaseDetailBoardController baseDetailBoard;
     AbstractConstructionPrototype prototype;
+
+    [Export]
+    ConstructionIconVM constructionIconVM;
     [Export]
     Array<ResourcePairVM> costPairVMs;
-    [Export]
-    Label _buyName;
     [Export]
     Button _buyButton;
 
@@ -35,10 +37,10 @@ public partial class SubBuyBoard : PanelContainer
         this.baseDetailBoard = baseDetailBoard;
         this.prototype = prototype;
 
-        _buyName.Text = baseDetailBoard.parent.game.idleGameplayExport.gameplayContext.gameDictionary.constructionPrototypeIdToShowName(prototype.language, prototype.prototypeId);
+        constructionIconVM.AfterSetModel(baseDetailBoard.parent.game, prototype);
 
 
-        var resourceTypeList = new List<string>() { ResourceType.COIN, ResourceType.WOOD };
+        var resourceTypeList = ResourceType.VALUES_FOR_SHOW_ORDER;
 
         for (int i = 0; i < resourceTypeList.Count; i++)
         {

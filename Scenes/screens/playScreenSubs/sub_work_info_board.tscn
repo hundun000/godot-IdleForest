@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0nim3ukfsyde"]
+
+[ext_resource type="Script" uid="uid://dkje8j0ikcu3k" path="res://Scripts/godotcore/PlayScreen/boards/subs/SubWorkInfoBoard.cs" id="1_3ssy4"]
+[ext_resource type="Texture2D" uid="uid://c5wuk6opkbumq" path="res://Resources/game/Board/BoardBody/Detail.png" id="2_sb580"]
+[ext_resource type="PackedScene" uid="uid://b3hvtwy7qhrvj" path="res://Scenes/base/resource_line.tscn" id="3_gqiuq"]
+
+[node name="workBoard" type="Control" node_paths=PackedStringArray("costLineVM", "gainLineVM")]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_3ssy4")
+costLineVM = NodePath("back/MarginContainer/rows/ResourceLineCost")
+gainLineVM = NodePath("back/MarginContainer/rows/ResourceLineGain")
+
+[node name="back" type="TextureRect" parent="." node_paths=PackedStringArray("costLineVM", "gainLineVM")]
+layout_mode = 1
+offset_right = 483.0
+offset_bottom = 95.0
+scale = Vector2(0.860811, 1.00806)
+texture = ExtResource("2_sb580")
+expand_mode = 1
+script = ExtResource("1_3ssy4")
+costLineVM = NodePath("MarginContainer/rows/ResourceLineCost")
+gainLineVM = NodePath("MarginContainer/rows/ResourceLineGain")
+
+[node name="MarginContainer" type="MarginContainer" parent="back"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -37.0
+offset_right = 180.0
+offset_bottom = 37.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="rows" type="VBoxContainer" parent="back/MarginContainer"]
+layout_mode = 2
+
+[node name="ResourceLineCost" parent="back/MarginContainer/rows" instance=ExtResource("3_gqiuq")]
+layout_mode = 2
+
+[node name="ResourceLineGain" parent="back/MarginContainer/rows" instance=ExtResource("3_gqiuq")]
+layout_mode = 2

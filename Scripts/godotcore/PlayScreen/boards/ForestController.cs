@@ -1,5 +1,8 @@
 using Godot;
+using GodotIdleForest.Scripts.godotcore;
 using GodotIdleForest.Scripts.godotcore.PlayScreen.boards;
+using GodotIdleForest.Scripts.godotcore.PlayScreen.boards.subs;
+using hundun.unitygame.gamelib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,36 +11,38 @@ using System.Threading.Tasks;
 
 public partial class ForestController : BaseDetailBoardController
 {
-    [Export]
-    Label _inputValue;
-    [Export]
-    Label _outputValue;
-    [Export]
-    Button _cutBtn;
-    [Export]
-    Label _cutOutputValue;
-    [Export]
-    Slider _proficiencySlider;
-    [Export]
-    Label _proficiencyValue;
+
+    SubWorkInfoBoard subWorkInfoBoard;
+    SubProficiencyBoard subProficiencyBoard;
+    SubDestoryBoard subDestoryBoard;
+
+
+    public override void _Ready()
+    {
+        base._Ready();
+        this.subWorkInfoBoard = GodotUtils.FindFirstChildOfType<SubWorkInfoBoard>(this);
+        this.subProficiencyBoard = GodotUtils.FindFirstChildOfType<SubProficiencyBoard>(this);
+        this.subDestoryBoard = GodotUtils.FindFirstChildOfType<SubDestoryBoard>(this);
+    }
+
+
     public override void BoardUpdate()
     {
         onLogicFrame();
     }
 
+    public override void AfterSetModel()
+    {
+        base.AfterSetModel();
+        subWorkInfoBoard.AfterSetModel(this);
+        subProficiencyBoard.AfterSetModel(this);
+        subDestoryBoard.AfterSetModel(this);
+    }
+
     public override void onLogicFrame()
     {
-		// ------ update text ------
-		_inputValue.Text = model.outputComponent.outputCostPack.modifiedValues[0].amount.ToString();
-		_outputValue.Text = model.outputComponent.outputGainPack.modifiedValues[0].amount.ToString();
-		_cutOutputValue.Text = model.existenceComponent.destoryGainPack.modifiedValues[0].amount.ToString();
-
-		// ------ update clickable-state ------
-		if (model.existenceComponent.canDestory()) _cutBtn.Disabled = (false);
-		else _cutBtn.Disabled = (true);
-
-		// ------ update proficiency------
-		_proficiencySlider.Value = model.saveData.proficiency;
-		_proficiencyValue.Text = model.saveData.proficiency + "%";
+        subWorkInfoBoard.onLogicFrame();
+		subProficiencyBoard.onLogicFrame();
+        subDestoryBoard.onLogicFrame();
 	}
 }

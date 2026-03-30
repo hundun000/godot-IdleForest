@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3hvtwy7qhrvj"]
+
+[ext_resource type="Script" uid="uid://c2mbg0hrf1ld4" path="res://Scripts/godotcore/base/ResourceLineVM.cs" id="1_ar12f"]
+[ext_resource type="PackedScene" uid="uid://c4xm02kpy8jwf" path="res://Scenes/base/resource_value_node.tscn" id="1_scwvq"]
+
+[node name="ResourceLine" type="HBoxContainer" node_paths=PackedStringArray("descriptionLabel", "pairVMs")]
+script = ExtResource("1_ar12f")
+descriptionLabel = NodePath("description")
+pairVMs = [NodePath("resource_pair"), NodePath("resource_pair2"), NodePath("resource_pair3")]
+
+[node name="description" type="Label" parent="."]
+layout_mode = 2
+text = "TEMP_DES:"
+
+[node name="resource_pair" parent="." instance=ExtResource("1_scwvq")]
+layout_mode = 2
+
+[node name="resource_pair2" parent="." instance=ExtResource("1_scwvq")]
+layout_mode = 2
+
+[node name="resource_pair3" parent="." instance=ExtResource("1_scwvq")]
+layout_mode = 2
+
+[editable path="resource_pair"]
+[editable path="resource_pair2"]
+[editable path="resource_pair3"]

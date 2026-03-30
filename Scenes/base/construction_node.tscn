@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://b520c55f6kb0c"]
+
+[ext_resource type="Texture2D" uid="uid://bb3jaalr2cevf" path="res://Resources/game/construction_icon_empty.png" id="1_52sx5"]
+[ext_resource type="Script" uid="uid://c3362aw4m6fld" path="res://Scripts/godotcore/base/ConstructionIconVM.cs" id="1_nseif"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("nameLabel", "imageBox")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_nseif")
+nameLabel = NodePath("name")
+imageBox = NodePath("icon")
+
+[node name="icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_52sx5")
+expand_mode = 1
+
+[node name="name" type="Label" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 88.0
+offset_right = 120.0
+offset_bottom = 113.0
+text = "TEMP"
+horizontal_alignment = 1
+vertical_alignment = 1

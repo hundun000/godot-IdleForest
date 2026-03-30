@@ -1,10 +1,18 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bke4iy6rb246b"]
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://bke4iy6rb246b"]
 
+[ext_resource type="Texture2D" uid="uid://3ccr4cij1hi5" path="res://Resources/game/CARBON.png" id="1_7sd02"]
 [ext_resource type="Script" uid="uid://b660tcxpesc61" path="res://Scripts/godotcore/TextureLibrary.cs" id="1_51rdh"]
 [ext_resource type="Texture2D" uid="uid://cc3rn734foie8" path="res://Resources/game/COIN.png" id="1_blqxo"]
 [ext_resource type="Texture2D" uid="uid://bls5g68phg8ug" path="res://Resources/game/WOOD.png" id="3_7sd02"]
+[ext_resource type="Texture2D" uid="uid://bvsrcuqmsvusv" path="res://Resources/game/SMALL_TREE.png" id="3_m1y43"]
+[ext_resource type="Texture2D" uid="uid://cfnm24lww54nt" path="res://Resources/game/Board/Constructions/little.png" id="3_q5pue"]
+[ext_resource type="Texture2D" uid="uid://dfowkyxh1s3tb" path="res://Resources/game/Board/Constructions/middle.png" id="4_kj8u0"]
+[ext_resource type="Texture2D" uid="uid://c4sp6imnuyc6d" path="res://Resources/game/Board/Constructions/big.png" id="5_m22rc"]
 
 [resource]
 script = ExtResource("1_51rdh")
 coinResourceIcon = ExtResource("1_blqxo")
 woodResourceIcon = ExtResource("3_7sd02")
+carbonResourceIcon = ExtResource("1_7sd02")
+forestConstructionIcon = ExtResource("3_m1y43")
+factoryConstructionIcons = Array[Texture2D]([ExtResource("3_q5pue"), ExtResource("4_kj8u0"), ExtResource("5_m22rc")])
